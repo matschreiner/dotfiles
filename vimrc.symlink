@@ -77,15 +77,15 @@ au Filetype python
     \ set autoindent |
     \ set fileformat=unix |
 
-" call vundle#begin()
+call vundle#begin()
 " " Add plugins here
 " Plugin 'VundleVim/Vundle.vim'
 "
 " " Send to pane only for tmux
 " Plugin 'vim-slime'
 "
-" " Nerdtree
-" Plugin 'scrooloose/nerdtree'
+" Nerdtree
+Plugin 'scrooloose/nerdtree'
 "
 " " Proper indentation
 " Plugin 'vim-scripts/indentpython.vim'
@@ -93,8 +93,8 @@ au Filetype python
 " " Highligt first unique letter in each word when using f or t
 " Plugin 'unblevable/quick-scope'
 "
-" " Colorscheme
-" Plugin 'morhetz/gruvbox'
+" Colorscheme
+Plugin 'morhetz/gruvbox'
 "
 " " Black
 " Plugin 'psf/black'
@@ -107,7 +107,7 @@ au Filetype python
 " " Autocompletion and jump to definition
 " Bundle 'Valloric/YouCompleteMe'
 "
-" call vundle#end()
+call vundle#end()
 filetype plugin indent on
 
 let g:slime_target = "tmux"

@@ -25,6 +25,7 @@ for FILE in $(ls $1); do
 			fi
 		else # if linkpath doesn't exist
 			ln -s $TARGETPATH $LINKPATH
+			echo "Set up link form $LINKNAME"
 		fi
 	fi
 done
