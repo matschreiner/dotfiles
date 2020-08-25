@@ -1,27 +1,42 @@
 #!/bin/bash
 
-for FILE in $(ls); do
+create_symlinks(){
+# $1 Target dir
+# $2 Link dir
+
+for FILE in $(ls $1); do
+
 	if [[ $FILE == *.symlink ]]
 
 	then
-		FILENAME=.${FILE%".symlink"}
-		REALPATH=$(realpath $FILE)
-		LINKNAME=../$FILENAME
-		if [[ -e $LINKNAME ]]
-		then
-			if [[ -L $LINKNAME ]] 
-			then
-				echo "$FILENAME is already set up"	
-			else
-				echo "ERROR: $FILENAME already exists"
+		TARGETPATH=$(realpath $1/$FILE)
+		LINKNAME=.${FILE%".symlink"}
+		LINKPATH=$2/$LINKNAME
+
+		if [[ -e $LINKPATH ]]
+		then # if linkpath exists
+			if [[ -L $LINKPATH ]]
+			then # linkpath is link
+				if [[ $(realpath $LINKPATH) == $TARGETPATH ]]
+				then
+					echo "$LINKNAME is already set up properly"
+				# code for recursion belonss here *
+				fi
 			fi
-		else
-			echo "Creating symlink for ${FILENAME%".symlink"}" 
-			ln -s $REALPATH $LINKNAME
+		else # if linkpath doesn't exist
+			ln -s $TARGETPATH $LINKPATH
 		fi
-
-	fi	
+	fi
 done
+}
 
-echo
+create_symlinks $HOME/.dotfiles $HOME
 echo "Symlinks created to dotfiles"
+
+
+# * CODE FOR RECURSION
+# else # linkpath is not link
+# 	if [[ -d $LINKPATH ]]
+# 	then # If the linkpath is a dir we go recursively into that dir and copy
+# 		create_symlinks $TARGETPATH $LINKPATH
+# 	fi
