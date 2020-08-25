@@ -1,0 +1,3 @@
+Clone repository and put in home folder
+
+make_symlink.sh will run through all files in the repository with the .symlink suffix and create a symbolic link pointing to it from the parent folder
