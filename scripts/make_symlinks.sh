@@ -37,5 +37,5 @@ for FILE in  $(ls $1); do
 done
 }
 
-create_symlinks "$HOME"/.dotfiles "$HOME"
+create_symlinks "$HOME"/dotfiles "$HOME"
 echo "Symlinks created to dotfiles"
