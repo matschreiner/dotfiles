@@ -39,11 +39,3 @@ done
 
 create_symlinks "$HOME"/.dotfiles "$HOME"
 echo "Symlinks created to dotfiles"
-
-
-# * CODE FOR RECURSION
-# else # linkpath is not link
-# 	if [[ -d $LINKPATH ]]
-# 	then # If the linkpath is a dir we go recursively into that dir and copy
-# 		create_symlinks $TARGETPATH $LINKPATH
-# 	fi
