@@ -1,1 +1,3 @@
 vim.symlink/bundle
+*.swp
+*.swo
