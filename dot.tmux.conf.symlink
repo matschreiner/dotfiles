@@ -8,8 +8,8 @@ bind-key C-a send-prefix
 
 bind - split-window -v
 bind _ split-window -v -c $PWD
-bind \ split-window -h
 bind | split-window -h -c $PWD
+bind \\ split-window -h
 
 bind r source-file ~/.tmux.conf
 
