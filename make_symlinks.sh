@@ -6,26 +6,32 @@ create_symlinks(){
 
 for FILE in $(ls $1); do
 
-	if [[ $FILE == *.symlink ]]
-
-	then
+	if [[ $FILE == *.symlink ]]; then # File should be symlinked
 		TARGETPATH=$(realpath $1/$FILE)
-		LINKNAME=.${FILE%".symlink"}
+		LINKNAME=${FILE%".symlink"}
+		LINKNAME=${LINKNAME/"dot."/"."}
 		LINKPATH=$2/$LINKNAME
 
-		if [[ -e $LINKPATH ]]
-		then # if linkpath exists
-			if [[ -L $LINKPATH ]]
-			then # linkpath is link
-				if [[ $(realpath $LINKPATH) == $TARGETPATH ]]
-				then
+		if [[ -d $TARGETPATH ]]; then # if file is a dir
+			echo "$TARGETPATH is dir and should be copied to $LINKNAME"
+
+			if [[ ! -e $LINKPATH ]]; then
+				mkdir $LINKPATH
+			fi
+
+			create_symlinks $TARGETPATH $LINKPATH
+
+
+		elif [[ -e $LINKPATH ]]; then # if linkpath exists
+			if [[ -L $LINKPATH ]]; then # linkpath is link
+				if [[ $(realpath $LINKPATH) == $TARGETPATH ]]; then
 					echo "$LINKNAME is already set up properly"
 				# code for recursion belonss here *
 				fi
 			fi
 		else # if linkpath doesn't exist
 			ln -s $TARGETPATH $LINKPATH
-			echo "Set up link form $LINKNAME"
+			echo "Symlink set up for $LINKNAME"
 		fi
 	fi
 done

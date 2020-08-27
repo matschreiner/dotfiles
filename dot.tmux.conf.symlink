@@ -1,0 +1,21 @@
+# Remap prefix
+# export TERM=screen-256color
+
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+
+
+bind - split-window -v
+bind _ split-window -v -c $PWD
+bind \ split-window -h
+bind | split-window -h -c $PWD
+
+bind r source-file ~/.tmux.conf
+
+bind -n M-h select-pane -L
+bind -n M-l select-pane -R
+bind -n M-k select-pane -U
+bind -n M-j select-pane -D
+
+set -s escape-time 0
