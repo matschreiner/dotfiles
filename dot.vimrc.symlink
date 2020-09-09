@@ -20,7 +20,7 @@ set ts=4
 set sw=4
 
 " Set syntastic checker be pylint
-let g:syntastic_python_checkers = ['pylint']
+" let g:syntastic_python_checkers = ['pylint']
 
 " Highlight the focused window by enabling numbers in margin
 augroup BgHighlight
@@ -78,33 +78,36 @@ au Filetype python
     \ set fileformat=unix |
 
 call vundle#begin()
-" " Add plugins here
-" Plugin 'VundleVim/Vundle.vim'
-"
-" " Send to pane only for tmux
+" Add plugins here
+Plugin 'VundleVim/Vundle.vim'
+
+" Send to pane only for tmux
 " Plugin 'vim-slime'
-"
+Plugin 'jpalardy/vim-slime'
+
 " Nerdtree
 Plugin 'scrooloose/nerdtree'
-"
-" " Proper indentation
-" Plugin 'vim-scripts/indentpython.vim'
-"
-" " Highligt first unique letter in each word when using f or t
-" Plugin 'unblevable/quick-scope'
-"
+
+" Proper indentation
+Plugin 'vim-scripts/indentpython.vim'
+
+" Highligt first unique letter in each word when using f or t
+Plugin 'unblevable/quick-scope'
+
 " Colorscheme
 Plugin 'morhetz/gruvbox'
-"
-" " Black
-" Plugin 'psf/black'
-"
-" " Rg
-" Plugin 'junegunn/fzf', { 'do': './install --bin' }
-" Plugin 'junegunn/fzf.vim'
-"
-" " Plugin 'vim-syntastic/syntastic'
-" " Autocompletion and jump to definition
+
+" Black
+Plugin 'psf/black'
+
+" Rg
+Plugin 'junegunn/fzf', { 'do': './install --bin' }
+Plugin 'junegunn/fzf.vim'
+
+Plugin 'tpope/vim-surround'
+
+" Plugin 'vim-syntastic/syntastic'
+" Autocompletion and jump to definition
 " Bundle 'Valloric/YouCompleteMe'
 "
 call vundle#end()
@@ -119,19 +122,3 @@ set background=dark
 set t_Co=256
 
 let g:NERDTreeWinSize=37
-
-
-" " Set leader
-" :let mapleader = ','
-"
-" " Exit on jk
-" inoremap jk <ESC>
-"
-" " Turbomove
-" noremap J 5j
-" noremap K 5k
-" noremap L 5l
-" noremap H 5h
-"
-" " Replace concatenate lines
-" nnoremap <leader>j J
