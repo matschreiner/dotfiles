@@ -1,4 +1,5 @@
 set nocompatible
+set number
 
 " Autoread files whenever they are being changed outside vim
 set autoread
@@ -111,6 +112,14 @@ Plugin 'tpope/vim-surround'
 " Bundle 'Valloric/YouCompleteMe'
 "
 call vundle#end()
+
+    nnoremap <c-t> :Tags<cr>
+    nnoremap <c-g> :RG<cr>
+    nnoremap <silent><c-f> :Files<CR>
+    nnoremap <c-b> :Buffers<cr>
+
+
+
 filetype plugin indent on
 
 let g:slime_target = "tmux"
@@ -122,3 +131,77 @@ set background=dark
 set t_Co=256
 
 let g:NERDTreeWinSize=37
+
+
+
+
+
+
+
+" CREATE FLOATING WINDOW {{{
+function! CreateCenteredFloatingWindow()
+  let width  = float2nr(&columns * 0.9)
+  let height = float2nr(&lines * 0.8)
+  let top    = ((&lines - height) / 2) - 1
+  let left   = (&columns - width) / 2
+  let opts   = { 'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal' }
+  let top    = "╭" . repeat("─", width - 2) . "╮"
+  let mid    = "│" . repeat(" ", width - 2) . "│"
+  let bot    = "╰" . repeat("─", width - 2) . "╯"
+  let lines  = [top] + repeat([mid], height - 2) + [bot]
+  let s:buf  = nvim_create_buf(v:false, v:true)
+
+  call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
+  call nvim_open_win(s:buf, v:true, opts)
+  set winhl=Normal:Floating
+
+  call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, CreatePadding(opts))
+  autocmd BufWipeout <buffer> exe 'bwipeout '.s:buf
+endfunction
+
+function! CreatePadding(opts)
+  let a:opts.row    += 1
+  let a:opts.height -= 2
+  let a:opts.col    += 2
+  let a:opts.width  -= 4
+  return a:opts
+endfunction
+" }}}
+
+
+
+" FZF
+let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore-vcs --hidden -g "!{node_modules,.git}"'
+
+command! -bang -nargs=? -complete=dir Files
+\ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--margin=1,2']}), <bang>0)
+
+let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
+let g:fzf_action = {
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit',
+      \ 'ctrl-t': 'tab split' }
+
+let g:fzf_colors = {
+      \ 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Keyword'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'PreProc'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Keyword'],
+      \ 'info':    ['fg', 'Statement'],
+      \ 'border':  ['fg', 'Comment'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Statement'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Keyword'] }
+
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt     = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command  = printf(command_fmt, '{q}')
+  let spec            = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command, '--layout=reverse', '--margin=1,2']}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
