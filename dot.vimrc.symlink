@@ -44,6 +44,7 @@ nnoremap <leader>b :Black <cr>
 " nnoremap <leader>l :Black <cr> :w <cr> :SyntasticCheck <cr> :echo "saved" <cr>
 noremap / :set hlsearch <cr> /
 noremap <leader>/ :set hlsearch!<CR>
+noremap <leader><C-V> :set paste!<CR>
 
 nmap <C-n> :NERDTreeToggle<CR>
 nnoremap <C-J> <C-W><C-J>
@@ -51,6 +52,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-B>  :YcmCompleter GoToDeclaration <CR>
+
 
 " Turbomove
 noremap J 5j
@@ -62,7 +64,7 @@ nnoremap <leader>j J
 inoremap jk <ESC>
 
 " Abbreviations
-iabbr bp import pudb;pu.db
+iabbr bp import pdb; pdb.set_trace()
 
 " source .vimrc after saving it
 au bufwritepost .vimrc source $MYVIMRC
@@ -109,14 +111,14 @@ Plugin 'tpope/vim-surround'
 
 " Plugin 'vim-syntastic/syntastic'
 " Autocompletion and jump to definition
-" Bundle 'Valloric/YouCompleteMe'
+Bundle 'Valloric/YouCompleteMe'
 "
 call vundle#end()
 
     nnoremap <c-t> :Tags<cr>
     nnoremap <c-g> :RG<cr>
     nnoremap <silent><c-f> :Files<CR>
-    nnoremap <c-b> :Buffers<cr>
+    " nnoremap <c-b> :Buffers<cr>
 
 
 
@@ -132,10 +134,7 @@ set t_Co=256
 
 let g:NERDTreeWinSize=37
 
-
-
-
-
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
 
 " CREATE FLOATING WINDOW {{{
