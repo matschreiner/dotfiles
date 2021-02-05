@@ -1,0 +1,21 @@
+{:main[
+       {:des "caps_lock to left_control when held",
+       :rules [[:##caps_lock :left_control nil {:alone :caps_lock}]]
+        }
+       {:des "quote to right control when held"
+       :rules [[:##quote :right_control nil {:alone :quote}]]
+        }
+       {:des "q + hjkl becomes arrow keys"
+       :rules [[:!Ca :left_arrow]]
+        }
+      {:des "hold q for visual mode"
+       :rules [
+               [:q ["v-mode" 1] nil {:afterup ["v-mode" 0] :alone :q}]
+               [:h :left_arrow ["v-mode" 1]]
+               [:j :down_arrow ["v-mode" 1]]
+               [:k :up_arrow ["v-mode" 1]]
+               [:l :right_arrow ["v-mode" 1]]
+               [:m :return_or_enter ["v-mode" 1]]
+               ]
+       }
+]}
