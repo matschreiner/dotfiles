@@ -35,9 +35,9 @@ set statusline=%f
 " Keymappings
 let mapleader = ","
 
-nnoremap <leader>r :checktime<CR>
+nnoremap <leader>r :checktime<CR>:so $MYVIMRC<CR>
 nnoremap <leader>p :vertical resize 93<CR>
-nnoremap <leader>s :Rg
+nnoremap <leader>s :Rg <CR>
 nnoremap <leader>v :e $MYVIMRC<CR>
 nnoremap <leader>w :w <cr>
 nnoremap <leader>b :Black <cr>
@@ -52,6 +52,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-B>  :YcmCompleter GoToDeclaration <CR>
+nnoremap <C-S>  :YcmCompleter config.yaml GoToDeclaration <CR>
 
 
 " Turbomove
@@ -62,6 +63,7 @@ noremap H 5h
 
 nnoremap <leader>j J
 inoremap jk <ESC>
+inoremap JK <ESC>
 
 " Abbreviations
 iabbr bp import pdb; pdb.set_trace()
@@ -168,7 +170,6 @@ endfunction
 " }}}
 
 
-
 " FZF
 let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore-vcs --hidden -g "!{node_modules,.git}"'
 
@@ -176,31 +177,32 @@ command! -bang -nargs=? -complete=dir Files
 \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--margin=1,2']}), <bang>0)
 
 let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
-let g:fzf_action = {
-      \ 'ctrl-s': 'split',
-      \ 'ctrl-v': 'vsplit',
-      \ 'ctrl-t': 'tab split' }
-
-let g:fzf_colors = {
-      \ 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
-      \ 'hl':      ['fg', 'Keyword'],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'PreProc'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-      \ 'hl+':     ['fg', 'Keyword'],
-      \ 'info':    ['fg', 'Statement'],
-      \ 'border':  ['fg', 'Comment'],
-      \ 'prompt':  ['fg', 'Conditional'],
-      \ 'pointer': ['fg', 'Statement'],
-      \ 'marker':  ['fg', 'Keyword'],
-      \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Keyword'] }
-
-function! RipgrepFzf(query, fullscreen)
-  let command_fmt     = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command  = printf(command_fmt, '{q}')
-  let spec            = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command, '--layout=reverse', '--margin=1,2']}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+" let g:fzf_action = {
+"       \ 'ctrl-s': 'split',
+"       \ 'ctrl-v': 'vsplit',
+"       \ 'ctrl-t': 'tab split' }
+"
+" let g:fzf_colors = {
+"       \ 'fg':      ['fg', 'Normal'],
+"       \ 'bg':      ['bg', 'Normal'],
+"       \ 'hl':      ['fg', 'Keyword'],
+"       \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'PreProc'],
+"       \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"       \ 'hl+':     ['fg', 'Keyword'],
+"       \ 'info':    ['fg', 'Statement'],
+"       \ 'border':  ['fg', 'Comment'],
+"       \ 'prompt':  ['fg', 'Conditional'],
+"       \ 'pointer': ['fg', 'Statement'],
+"       \ 'marker':  ['fg', 'Keyword'],
+"       \ 'spinner': ['fg', 'Label'],
+"       \ 'header':  ['fg', 'Keyword'] }
+"
+" function! RipgrepFzf(query, fullscreen)
+"   let command_fmt     = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+"   let initial_command = printf(command_fmt, shellescape(a:query))
+"   let reload_command  = printf(command_fmt, '{q}')
+"   let spec            = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command, '--layout=reverse', '--margin=1,2']}
+"   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+" endfunction
+" command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+"
