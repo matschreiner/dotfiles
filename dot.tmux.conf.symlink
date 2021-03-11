@@ -11,6 +11,8 @@ bind _ split-window -v -c $PWD
 bind | split-window -h -c $PWD
 bind \\ split-window -h
 
+bind g new-window -c lazygit
+
 bind r source-file ~/.tmux.conf
 
 bind -n M-h select-pane -L
