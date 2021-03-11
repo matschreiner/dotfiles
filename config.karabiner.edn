@@ -16,8 +16,12 @@
                [:k :up_arrow ["v-mode" 1]]
                [:l :right_arrow ["v-mode" 1]]
                [:m :return_or_enter ["v-mode" 1]]
-               [:u :delete_or_backspace ["v-mode" 1]]
-               [:i :delete_forward ["v-mode" 1]]
+               [:u :home ["v-mode" 1]]
+               [:i :end ["v-mode" 1]]
+               [:semicolon :!Oquote ["v-mode" 1]]
+               [:quote :!Oo ["v-mode" 1]]
+               [:open_bracket :!Oa ["v-mode" 1]]
+
                ]
        }
 
@@ -34,6 +38,28 @@
                [:comma :2 ["n-mode" 1]]
                [:m :1 ["n-mode" 1]]
                [:slash :0 ["n-mode" 1]]
+               [:x :comma ["n-mode" 1]]
+               [:c :period ["n-mode" 1]]
                ]
        }
 ]}
+
+
+    ;; !  | means mandatory -   modifier(s) alone when pressend change behavior
+    ;; #  | means optional  -   modifiers are optional (but atleast one necessary)
+
+    ;; :!Ca is keycode :a and prefix a with !C
+
+    ;; C  | left_command
+    ;; T  | left_control
+    ;; O  | left_option
+    ;; S  | left_shift
+    ;; F  | fn
+    ;; Q  | right_command
+    ;; W  | right_control
+    ;; E  | right_option
+    ;; R  | right_shift
+
+    ;; ## | optional any (this has no effect when used on the RHS; only LHS)
+    ;; !! | command + control + optional + shift (hyper)
+
