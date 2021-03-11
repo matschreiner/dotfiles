@@ -15,7 +15,7 @@ bind g new-window -c "#{pane_current_path}" lazygit
 
 bind r source-file ~/.tmux.conf
 
-bind d split-window -v \; split-window -h
+bind d split-window -v -c $PWD \; split-window -h -c $PWD
 
 bind -n M-h select-pane -L
 bind -n M-l select-pane -R
