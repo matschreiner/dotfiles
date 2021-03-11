@@ -107,11 +107,13 @@ Plugin 'psf/black'
 
 " Rg
 Plugin 'junegunn/fzf', { 'do': './install --bin' }
+
 Plugin 'junegunn/fzf.vim'
 
 Plugin 'tpope/vim-surround'
 
-" Plugin 'vim-syntastic/syntastic'
+Plugin 'vim-syntastic/syntastic'
+
 " Autocompletion and jump to definition
 Bundle 'Valloric/YouCompleteMe'
 "
@@ -121,8 +123,6 @@ call vundle#end()
     nnoremap <c-g> :RG<cr>
     nnoremap <silent><c-f> :Files<CR>
     " nnoremap <c-b> :Buffers<cr>
-
-
 
 filetype plugin indent on
 
@@ -206,3 +206,23 @@ let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
 " endfunction
 " command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 "
+"
+" Put plugins and dictionaries in this dir (also on Windows)
+let vimDir = '$HOME/.vim'
+
+if stridx(&runtimepath, expand(vimDir)) == -1
+  " vimDir is not on runtimepath, add it
+  let &runtimepath.=','.vimDir
+endif
+
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    let myUndoDir = expand(vimDir . '/undodir')
+    " Create dirs
+    :silent call system('mkdir ' . vimDir)
+    :silent call system('mkdir ' . myUndoDir)
+    let &undodir = myUndoDir
+    set undofile
+endif
+
+
