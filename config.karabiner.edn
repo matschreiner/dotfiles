@@ -2,8 +2,8 @@
        {:des "caps_lock to left_control when held",
        :rules [[:##caps_lock :left_control nil {:alone :caps_lock}]]
         }
-       {:des "quote to right control when held"
-       :rules [[:##quote :right_control nil {:alone :quote}]]
+       {:des "tab to left_option when held",
+       :rules [[:##tab :left_option nil {:alone :tab}]]
         }
        {:des "q + hjkl becomes arrow keys"
        :rules [[:!Ca :left_arrow]]
@@ -16,6 +16,24 @@
                [:k :up_arrow ["v-mode" 1]]
                [:l :right_arrow ["v-mode" 1]]
                [:m :return_or_enter ["v-mode" 1]]
+               [:u :delete_or_backspace ["v-mode" 1]]
+               [:i :delete_forward ["v-mode" 1]]
+               ]
+       }
+
+      {:des "hold tilde for n-mode"
+       :rules [
+               [:grave_accent_and_tilde ["n-mode" 1] nil {:afterup ["n-mode" 0] :alone :grave_accent_and_tilde}]
+               [:o :9 ["n-mode" 1]]
+               [:i :8 ["n-mode" 1]]
+               [:u :7 ["n-mode" 1]]
+               [:l :6 ["n-mode" 1]]
+               [:k :5 ["n-mode" 1]]
+               [:j :4 ["n-mode" 1]]
+               [:period :3 ["n-mode" 1]]
+               [:comma :2 ["n-mode" 1]]
+               [:m :1 ["n-mode" 1]]
+               [:slash :0 ["n-mode" 1]]
                ]
        }
 ]}
