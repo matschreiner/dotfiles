@@ -5,8 +5,6 @@
        {:des "tab to left_option when held",
        :rules [[:##tab :left_option nil {:alone :tab}]]
         }
-       {:des "q + hjkl becomes arrow keys"
-       :rules [[:!Ca :left_arrow]]
         }
       {:des "hold q for visual mode"
        :rules [
