@@ -114,6 +114,8 @@ Plugin 'tpope/vim-surround'
 
 Plugin 'vim-syntastic/syntastic'
 
+Plugin 'Krasjet/auto.pairs'
+
 " Autocompletion and jump to definition
 Bundle 'Valloric/YouCompleteMe'
 "
