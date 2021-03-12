@@ -8,20 +8,20 @@
        {:des "shifts to backspace and delete",
        :rules [[:##right_shift :right_shift nil {:alone :delete_or_backspace}]]
         }
-      {:des "hold q for visual mode"
+      {:des "hold q for utils mode"
        :rules [
-               [:q ["v-mode" 1] nil {:afterup ["v-mode" 0] :alone :q}]
-               [:h :left_arrow ["v-mode" 1]]
-               [:j :down_arrow ["v-mode" 1]]
-               [:k :up_arrow ["v-mode" 1]]
-               [:l :right_arrow ["v-mode" 1]]
-               [:m :return_or_enter ["v-mode" 1]]
-               [:u :home ["v-mode" 1]]
-               [:i :end ["v-mode" 1]]
-               [:semicolon :!Oquote ["v-mode" 1]]
-               [:quote :!Oo ["v-mode" 1]]
-               [:open_bracket :!Oa ["v-mode" 1]]
-               [:slash :!Qslash ["v-mode" 1]]
+               [:q ["utils-mode" 1] nil {:afterup ["utils-mode" 0] :alone :q}]
+               [:h :left_arrow ["utils-mode" 1]]
+               [:j :down_arrow ["utils-mode" 1]]
+               [:k :up_arrow ["utils-mode" 1]]
+               [:l :right_arrow ["utils-mode" 1]]
+               [:m :return_or_enter ["utils-mode" 1]]
+               [:u :home ["utils-mode" 1]]
+               [:i :end ["utils-mode" 1]]
+               [:semicolon :!Oquote ["utils-mode" 1]]
+               [:quote :!Oo ["utils-mode" 1]]
+               [:open_bracket :!Oa ["utils-mode" 1]]
+               [:slash :!Qslash ["utils-mode" 1]]
 
                ]
        }
