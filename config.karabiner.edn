@@ -6,7 +6,10 @@
        :rules [[:##tab :left_option nil {:alone :tab}]]
         }
        {:des "shifts to backspace and delete",
-       :rules [[:##right_shift :right_shift nil {:alone :delete_or_backspace}]]
+       :rules [
+               [:##right_shift :right_shift nil {:alone :delete_or_backspace}]
+               [:##left_shift :left_shift nil {:alone :delete_forward}]
+               ]
         }
       {:des "hold q for utils mode"
        :rules [
