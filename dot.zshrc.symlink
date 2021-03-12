@@ -22,5 +22,5 @@ export ZSH_DISABLE_COMPFIX=true
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/jamas/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
-plugins=(git zsh-syntax-highlighting)
+plugins=(git zsh-syntax-highlighting fzf)
 source $ZSH/oh-my-zsh.sh
