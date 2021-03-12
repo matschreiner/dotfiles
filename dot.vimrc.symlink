@@ -20,6 +20,8 @@ set sts=4
 set ts=4
 set sw=4
 
+let @s="100|2hbi\"\\\<CR>f\"\<Esc>"
+
 " Set syntastic checker be pylint
 " let g:syntastic_python_checkers = ['pylint']
 
@@ -39,6 +41,7 @@ nnoremap <leader>r :checktime<CR>:so $MYVIMRC<CR>
 nnoremap <leader>p :vertical resize 93<CR>
 nnoremap <leader>s :Rg <CR>
 nnoremap <leader>v :e $MYVIMRC<CR>
+nnoremap <leader>V :!e $MYVIMRC<CR>
 nnoremap <leader>w :w <cr>
 nnoremap <leader>b :Black <cr>
 " nnoremap <leader>l :Black <cr> :w <cr> :SyntasticCheck <cr> :echo "saved" <cr>
@@ -129,7 +132,8 @@ call vundle#end()
 filetype plugin indent on
 
 let g:slime_target = "tmux"
-let g:slime_python_ipython = 1
+let g:slime_default_config = {"socket_name": "default", "target_pane": 1}
+
 
 " Plugin Settings
 colorscheme gruvbox
