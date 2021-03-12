@@ -21,6 +21,7 @@
                [:semicolon :!Oquote ["v-mode" 1]]
                [:quote :!Oo ["v-mode" 1]]
                [:open_bracket :!Oa ["v-mode" 1]]
+               [:slash :!Qslash ["v-mode" 1]]
 
                ]
        }
