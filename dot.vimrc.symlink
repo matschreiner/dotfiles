@@ -114,14 +114,20 @@ Plugin 'psf/black'
 " Rg
 Plugin 'junegunn/fzf', { 'do': './install --bin' }
 
+"fzf
 Plugin 'junegunn/fzf.vim'
 
 Plugin 'tpope/vim-surround'
+"documentation generation
+Plugin 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
+" for linting
 Plugin 'vim-syntastic/syntastic'
 
+" autocompletion of paranthesis
 Plugin 'Krasjet/auto.pairs'
 
+" puts git symbols in the gutter
 Plugin 'airblade/vim-gitgutter'
 
 " Autocompletion and jump to definition
