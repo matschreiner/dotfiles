@@ -21,6 +21,8 @@ set sts=4
 set ts=4
 set sw=4
 
+set updatetime=100
+
 let @s="100|2hbi\"\\\<CR>f\"\<Esc>"
 
 " Set syntastic checker be pylint
