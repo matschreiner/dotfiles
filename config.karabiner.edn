@@ -24,6 +24,8 @@
                [:quote :!Oo ["utils-mode" 1]]
                [:open_bracket :!Oa ["utils-mode" 1]]
                [:slash :!Qslash ["utils-mode" 1]]
+               [:comma :delete_or_backspace ["utils-mode" 1]]
+               [:period :delete_forward ["utils-mode" 1]]
 
                ]
        }
