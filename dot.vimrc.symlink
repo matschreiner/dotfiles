@@ -1,3 +1,4 @@
+
 set nocompatible
 set number
 
@@ -118,6 +119,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'vim-syntastic/syntastic'
 
 Plugin 'Krasjet/auto.pairs'
+
+Plugin 'airblade/vim-gitgutter'
 
 " Autocompletion and jump to definition
 Bundle 'Valloric/YouCompleteMe'
