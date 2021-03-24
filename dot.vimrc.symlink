@@ -31,7 +31,6 @@ let @s="100|2hbi\"\\\<CR>f\"\<Esc>"
 " Highlight the focused window by enabling numbers in margin
 augroup BgHighlight
     autocmd!
-    autocmd WinEnter :GitGutter
     autocmd WinEnter * set number
     autocmd WinLeave * set nonumber
 augroup END
