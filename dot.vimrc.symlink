@@ -51,7 +51,7 @@ nnoremap <leader>b :Black <cr>
 noremap / :set hlsearch <cr> /
 noremap <leader>/ :set hlsearch!<CR>
 noremap <leader><C-V> :set paste!<CR>
-noremap <leader>g :GitGutter
+noremap <leader>g :GitGutter<CR>
 
 nmap <C-n> :NERDTreeToggle<CR>
 nnoremap <C-J> <C-W><C-J>
