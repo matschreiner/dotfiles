@@ -132,6 +132,7 @@ Plugin 'Krasjet/auto.pairs'
 " puts git symbols in the gutter
 Plugin 'airblade/vim-gitgutter'
 
+Plugin 'junegunn/vim-easy-align'
 " Autocompletion and jump to definition
 Bundle 'Valloric/YouCompleteMe'
 "
@@ -157,6 +158,9 @@ set t_Co=256
 let g:NERDTreeWinSize=37
 
 let g:ycm_autoclose_preview_window_after_insertion = 1
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+
 
 
 " CREATE FLOATING WINDOW {{{
