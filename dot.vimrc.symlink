@@ -52,6 +52,8 @@ noremap / :set hlsearch <cr> /
 noremap <leader>/ :set hlsearch!<CR>
 noremap <leader><C-V> :set paste!<CR>
 noremap <leader>g :GitGutter<CR>
+nnoremap <leader>j J
+nnoremap <leader>c
 
 nmap <C-n> :NERDTreeToggle<CR>
 nnoremap <C-J> <C-W><C-J>
@@ -68,7 +70,6 @@ noremap K 5k
 noremap L 5l
 noremap H 5h
 
-nnoremap <leader>j J
 inoremap jk <ESC>
 inoremap JK <ESC>
 
