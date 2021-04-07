@@ -30,9 +30,9 @@
                ]
        }
 
-      {:des "hold tilde for n-mode"
+      {:des "hold z for n-mode"
        :rules [
-               [:grave_accent_and_tilde ["n-mode" 1] nil {:afterup ["n-mode" 0] :alone :grave_accent_and_tilde}]
+               [:z ["n-mode" 1] nil {:afterup ["n-mode" 0] :alone :z}]
                [:o :9 ["n-mode" 1]]
                [:i :8 ["n-mode" 1]]
                [:u :7 ["n-mode" 1]]
