@@ -13,7 +13,6 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 set number
 set encoding=utf-8
-set hlsearch
 
 " set columns=93
 set autoread
@@ -35,8 +34,10 @@ let @s="100|2hbi\"\\\<CR>f\"\<Esc>"
 augroup BgHighlight
     autocmd!
     autocmd WinEnter * set number
-    autocmd WinLeave * set nonumber
+    autocmd WinLeave * setlocal nonumber
 augroup END
+
+syn keyword pythonBuiltin self
 
 set statusline=%f
 
@@ -54,9 +55,7 @@ nnoremap <leader>b :Black <cr>
 noremap / :set hlsearch <cr> /
 noremap <leader>/ :set hlsearch!<CR>
 noremap <leader><C-V> :set paste!<CR>
-noremap <leader>g :GitGutter<CR>
 nnoremap <leader>j J
-nnoremap <leader>c
 
 nmap <C-n> :NERDTreeToggle<CR>
 nnoremap <C-J> <C-W><C-J>
@@ -132,9 +131,6 @@ Plugin 'vim-syntastic/syntastic'
 " autocompletion of paranthesis
 Plugin 'Krasjet/auto.pairs'
 
-" puts git symbols in the gutter
-Plugin 'airblade/vim-gitgutter'
-
 Plugin 'junegunn/vim-easy-align'
 
 " Autocompletion and jump to definition
@@ -157,6 +153,7 @@ let g:doge_doc_standard_python='google'
 " Plugin Settings
 colorscheme gruvbox
 set background=dark
+syn keyword pythonExceptions self
 set t_Co=256
 
 let g:NERDTreeWinSize=37
@@ -164,7 +161,6 @@ let g:NERDTreeWinSize=37
 let g:ycm_autoclose_preview_window_after_insertion = 1
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
-
 
 
 " CREATE FLOATING WINDOW {{{
