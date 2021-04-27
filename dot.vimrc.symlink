@@ -1,4 +1,5 @@
 
+"
 " General settings
 "
 echo "(>^.^<)"
@@ -37,7 +38,6 @@ augroup BgHighlight
     autocmd WinLeave * setlocal nonumber
 augroup END
 
-syn keyword pythonBuiltin self
 
 set statusline=%f
 
