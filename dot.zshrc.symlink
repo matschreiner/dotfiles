@@ -6,7 +6,7 @@ eval "$(pyenv init -)"
 
 alias tmux-dev='$HOME/dotfiles/tmux-dev.sh'
 alias activate='source .venv/bin/activate'
-alias new-venv='python -m venv .venv; activate'
+alias new-venv='python -m venv .venv; activate; pip install --upgrade --quiet pip '
 
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
