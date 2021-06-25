@@ -150,6 +150,7 @@ disable=print-statement,
         logging-fstring-interpolation,
         no-name-in-module,
 		too-many-instance-attributes,
+		redefined-outer-name,
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
@@ -582,7 +583,7 @@ max-public-methods=20
 max-returns=6
 
 # Maximum number of statements in function / method body.
-max-statements=50
+max-statements=100
 
 # Minimum number of public methods for a class (see R0903).
 min-public-methods=2
