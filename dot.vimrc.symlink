@@ -65,7 +65,6 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap <C-B>  :YcmCompleter GoToDeclaration <CR>
 nnoremap <C-S>  :YcmCompleter config.yaml GoToDeclaration <CR>
 
-
 " Turbomove
 noremap J 5j
 noremap K 5k
@@ -135,7 +134,9 @@ Plugin 'junegunn/vim-easy-align'
 
 " Autocompletion and jump to definition
 Bundle 'Valloric/YouCompleteMe'
-"
+
+Plugin 'preservim/nerdcommenter'
+
 call vundle#end()
 
     nnoremap <c-t> :Tags<cr>
@@ -145,19 +146,30 @@ call vundle#end()
 
 filetype plugin indent on
 
+
+" Slime
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": 1}
 
+"
 let g:doge_doc_standard_python='google'
 
 " Plugin Settings
+"
+" Gruvbox
 colorscheme gruvbox
 set background=dark
 syn keyword pythonExceptions self
 set t_Co=256
 
+" Nerd commenter
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
+
+"Nerd tree
 let g:NERDTreeWinSize=37
 
+"YouCompleteMe
 let g:ycm_autoclose_preview_window_after_insertion = 1
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
@@ -229,7 +241,6 @@ let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
 "   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 " endfunction
 " command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-"
 "
 " Put plugins and dictionaries in this dir (also on Windows)
 let vimDir = '$HOME/.vim'
