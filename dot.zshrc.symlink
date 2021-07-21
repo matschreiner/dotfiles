@@ -34,3 +34,7 @@ export ZSH_DISABLE_COMPFIX=true
 ZSH_THEME="robbyrussell"
 plugins=(git zsh-syntax-highlighting fzf)
 source $ZSH/oh-my-zsh.sh
+
+
+export PATH=/Users/jamas/Library/Orca420:$PATH
+
