@@ -44,6 +44,8 @@ set statusline=%f
 " Keymappings
 let mapleader = ","
 
+" delete that doesn't occupy register
+nnoremap <leader>d "_d
 nnoremap <leader>r :checktime<CR>:so $MYVIMRC<CR>
 nnoremap <leader>p :vertical resize 93<CR>
 nnoremap <leader>s :Rg <CR>
