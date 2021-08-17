@@ -66,6 +66,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-B>  :YcmCompleter GoToDeclaration <CR>
 nnoremap <C-S>  :YcmCompleter config.yaml GoToDeclaration <CR>
+noremap <C-X> :call NERDComment(-1,"toggle")<CR>
 
 " Turbomove
 noremap J 5j
