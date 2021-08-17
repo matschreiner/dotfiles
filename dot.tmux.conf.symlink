@@ -17,6 +17,10 @@ bind r source-file ~/.tmux.conf
 
 bind d split-window -v -c "#{pane_current_path}" \; split-window -h -c "#{pane_current_path}"
 
+unbind t
+
+
+bind t send-keys 'cd /tmp' Enter \; split-window -v -c "/tmp" \; split-window -h -c "/tmp" \; select-pane -t 0 \; send-keys nvim Enter Enter \; send-keys C-n \; send-keys C-l
 bind -n M-h select-pane -L
 bind -n M-l select-pane -R
 bind -n M-k select-pane -U
@@ -29,3 +33,9 @@ bind -r C-l resize-pane -R 8
 
 set -s escape-time 0
 
+# {up-of}                The pane above the active pane
+# {down-of}              The pane below the active pane
+# {left-of}              The pane to the left of the active pane
+# {right-of}             The pane to the right of the active pane
+#
+# swap-pane [-dDUZ] [-s src-pane] [-t dst-pane]
