@@ -11,6 +11,7 @@ eval "$(pyenv init --path)"
 alias tmux-dev='$HOME/dotfiles/tmux-dev.sh'
 alias activate='source .venv/bin/activate'
 alias new-venv='python -m venv .venv; activate; pip install --upgrade --quiet pip '
+alias backup='rsync -a ~/pipelines/ ~/pipelines_backup'
 
 
 
@@ -37,4 +38,5 @@ source $ZSH/oh-my-zsh.sh
 
 
 export PATH=/Users/jamas/Library/Orca420:$PATH
+
 
