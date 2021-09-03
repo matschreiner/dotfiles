@@ -13,7 +13,7 @@ then
 	cd $1
 fi
 
-tmux send-keys nvim Enter Enter \; send-keys C-n \; send-keys C-l
+~/dotfiles/tmux-scripts/start-vim.sh
 
 tmux split-window -v
 activate_venv
