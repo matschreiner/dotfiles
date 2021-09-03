@@ -15,7 +15,8 @@ bind g new-window -c "#{pane_current_path}" lazygit
 
 bind r source-file ~/.tmux.conf
 
-bind d split-window -v -c "#{pane_current_path}" \; split-window -h -c "#{pane_current_path}"
+# bind d split-window -v -c "#{pane_current_path}" \; split-window -h -c "#{pane_current_path}"
+bind d send-keys 'cd #{pane_current_path}' Enter \; split-window -v -c "#{pane_current_path}" \; split-window -h -c "#{pane_current_path}" \; select-pane -t 0 \; send-keys nvim Enter Enter \; send-keys C-n \; send-keys C-l
 
 unbind t
 bind t send-keys 'cd /tmp' Enter \; split-window -v -c "/tmp" \; split-window -h -c "/tmp" \; select-pane -t 0 \; send-keys nvim Enter Enter \; send-keys C-n \; send-keys C-l
