@@ -36,7 +36,14 @@ ZSH_THEME="robbyrussell"
 plugins=(git zsh-syntax-highlighting fzf)
 source $ZSH/oh-my-zsh.sh
 
+alias "combine_pdf"="/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py" -o
 
-export PATH=/Users/jamas/Library/Orca420:$PATH
+# Add ORCA to path
+export PATH=/Users/jamas/Library/Orca420:$PATH; export LD_LIBRARY_PATH=/Users/jamas/Library/Orca420:$LD_LIBRARY_PATH
 
+OPENMPI_PATH=/usr/local/Cellar/open-mpi/4.1.1_2/bin
+export PATH=$OPENMPI_PATH:$PATH; export LD_LIBRARY_PATH=$OPENMPI_PATH/lib:$LD_LIBRARY_PATH
+export ASE_ORCA_COMMAND='/Users/jamas/Library/Orca420'
+
+alias "dftb+"="/usr/local/Caskroom/miniforge/base/bin/dftb+"
 
