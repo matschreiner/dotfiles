@@ -151,15 +151,15 @@ call vundle#end()
 filetype plugin indent on
 
 
+" Plugin Settings
+
 " Slime
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": 1}
 
-"
-let g:doge_doc_standard_python='google'
+" Doge
+" let g:doge_doc_standard_python='google'
 
-" Plugin Settings
-"
 " Gruvbox
 colorscheme gruvbox
 set background=dark
@@ -175,9 +175,16 @@ let g:NERDTreeWinSize=37
 
 "YouCompleteMe
 let g:ycm_autoclose_preview_window_after_insertion = 1
+
+
+"Easy Align
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
+"fz
+let $FZF_DEFAULT_COMMAND='rg --files'
+nnoremap <leader>f :Files <CR>
+nnoremap <leader>g :Rg <CR>
 
 " CREATE FLOATING WINDOW {{{
 function! CreateCenteredFloatingWindow()
