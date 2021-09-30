@@ -16,10 +16,11 @@ bind g new-window -c "#{pane_current_path}" lazygit
 
 bind r source-file ~/.tmux.conf
 
-
+unbind E
 bind v send-keys "~/dotfiles/tmux-scripts/start-vim.sh" Enter
 bind d send-keys '~/dotfiles/tmux-scripts/tmux-dev.sh' Enter
 bind t send-keys "~/dotfiles/tmux-scripts/tmux-dev.sh '/tmp'" Enter
+bind e -c '~/dotfiles/tmux-scripts/python-error.sh'
 
 
 unbind o
