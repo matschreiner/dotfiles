@@ -4,7 +4,7 @@
 "
 echo "(>^.^<)"
 set nocompatible
-set number
+filetype plugin indent on
 
 " Autoread files whenever they are being changed outside vim
 set autoread
@@ -28,10 +28,6 @@ set updatetime=100
 
 let @s="100|2hbi\"\\\<CR>f\"\<Esc>"
 
-" Set syntastic checker be pylint
-" let g:syntastic_python_checkers = ['pylint']
-
-" Highlight the focused window by enabling numbers in margin
 augroup BgHighlight
     autocmd!
     autocmd WinEnter * set number
@@ -143,16 +139,10 @@ Plugin 'preservim/nerdcommenter'
 
 call vundle#end()
 
-    "nnoremap <c-t> :Tags<cr>
-    "nnoremap <c-g> :RG<cr>
-    "nnoremap <silent><c-f> :Files<CR>
-    "nnoremap <c-b> :Buffers<cr>
 
-filetype plugin indent on
 
 
 " Plugin Settings
-
 " Slime
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": 1}
@@ -185,8 +175,6 @@ xmap ga <Plug>(EasyAlign)
 let $FZF_DEFAULT_COMMAND='rg --files'
 nnoremap <leader>f :Files <CR>
 nnoremap <leader>g :Rg <CR>
-
-
 
 
 " Have persistent undo inn vim
