@@ -20,7 +20,7 @@ unbind E
 bind v send-keys "~/dotfiles/tmux-scripts/start-vim.sh" Enter
 bind d send-keys '~/dotfiles/tmux-scripts/tmux-dev.sh' Enter
 bind t send-keys "~/dotfiles/tmux-scripts/tmux-dev.sh '/tmp'" Enter
-bind e -c '~/dotfiles/tmux-scripts/python-error.sh'
+bind e run '~/dotfiles/tmux-scripts/open-file-vim.sh'
 
 
 unbind o
@@ -38,9 +38,10 @@ bind -r C-l resize-pane -R 8
 
 set -s escape-time 0
 
-# {up-of}                The pane above the active pane
-# {down-of}              The pane below the active pane
-# {left-of}              The pane to the left of the active pane
-# {right-of}             The pane to the right of the active pane
-#
-# swap-pane [-dDUZ] [-s src-pane] [-t dst-pane]
+#Pane colours
+#-------------------------------------------------------#
+# set inactive/active window styles
+set -g window-style 'fg=colour247,bg=colour236'
+set -g window-active-style 'fg=colour250,bg=black'
+#-------------------------------------------------------#
+
