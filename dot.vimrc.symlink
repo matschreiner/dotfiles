@@ -126,7 +126,7 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'tpope/vim-surround'
 
 "documentation generation
-Plugin 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+"Plugin 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
 " for linting
 Plugin 'vim-syntastic/syntastic'
@@ -143,10 +143,10 @@ Plugin 'preservim/nerdcommenter'
 
 call vundle#end()
 
-    nnoremap <c-t> :Tags<cr>
-    nnoremap <c-g> :RG<cr>
-    nnoremap <silent><c-f> :Files<CR>
-    " nnoremap <c-b> :Buffers<cr>
+    "nnoremap <c-t> :Tags<cr>
+    "nnoremap <c-g> :RG<cr>
+    "nnoremap <silent><c-f> :Files<CR>
+    "nnoremap <c-b> :Buffers<cr>
 
 filetype plugin indent on
 
