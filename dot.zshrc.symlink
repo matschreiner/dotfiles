@@ -12,7 +12,11 @@ alias tmux-dev='$HOME/dotfiles/tmux-dev.sh'
 alias activate='source .venv/bin/activate'
 alias new-venv='python -m venv .venv; activate; pip install --upgrade --quiet pip '
 alias backup='rsync -a ~/pipelines/ ~/pipelines_backup'
+alias refresh='source $HOME/.zshrc'
 
+# Setup ripgrep config path
+export RIPGREP_CONFIG_PATH="$HOME/dotfiles/configs/ripgrep.cfg"
+alias rgf='rg --files | rg'
 
 
 # Setup FZF
