@@ -139,7 +139,7 @@ Plugin 'junegunn/vim-easy-align'
 " Autocompletion and jump to definition
 Bundle 'Valloric/YouCompleteMe'
 
-"Plugin 'preservim/nerdcommenter'
+Plugin 'preservim/nerdcommenter'
 
 call vundle#end()
 
