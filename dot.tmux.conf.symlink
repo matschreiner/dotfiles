@@ -21,6 +21,7 @@ bind v send-keys "~/dotfiles/tmux-scripts/start-vim.sh" Enter
 bind d send-keys '~/dotfiles/tmux-scripts/tmux-dev.sh' Enter
 bind t send-keys "~/dotfiles/tmux-scripts/tmux-dev.sh '/tmp'" Enter
 bind e run '~/dotfiles/tmux-scripts/open-file-vim.sh'
+bind E run '~/dotfiles/tmux-scripts/open-file-vim.sh --open-realpath'
 
 
 unbind o
