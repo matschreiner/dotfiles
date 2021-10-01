@@ -1,1 +1,4 @@
 dont occupy register hotkeys for vim x,s,c,d,
+
+
+command: rg --help | tee tmp | fzf --preview "bat tmp --color=always --style=numbers --highlight-line {n} --pager=\'less +{n} g\'"
