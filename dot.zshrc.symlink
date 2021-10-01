@@ -6,6 +6,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 
+
 # Setup custom aliases
 # --------------------
 alias tmux-dev='$HOME/dotfiles/tmux-dev.sh'
@@ -13,25 +14,21 @@ alias activate='source .venv/bin/activate'
 alias new-venv='python -m venv .venv; activate; pip install --upgrade --quiet pip '
 alias backup='rsync -a ~/pipelines/ ~/pipelines_backup'
 alias refresh='source $HOME/.zshrc'
+alias "combine_pdf"="/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py" -o
 
-# Setup ripgrep config path
-export RIPGREP_CONFIG_PATH="$HOME/dotfiles/configs/ripgrep.cfg"
+
+# Setup ripgrep
+# -------------------------
 alias rgf='rg --files | rg'
 
 
 # Setup FZF
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-
-fd() {
-  local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
-}
-
+# ---------
 export ZSH_DISABLE_COMPFIX=true
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+alias -g pw="fzf --color 'border:#008080' --preview 'bat --color=always --style=numbers {}' --bind shift-up:preview-up,shift-down:preview-down"
+# export FZF_DEFAULT_COMMAND='rg --files'
+# alias -g Z='| fzf'
 
 
 # Setup Plugins for zsh
@@ -40,14 +37,20 @@ ZSH_THEME="robbyrussell"
 plugins=(git zsh-syntax-highlighting fzf)
 source $ZSH/oh-my-zsh.sh
 
-alias "combine_pdf"="/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py" -o
 
-# Add ORCA to path
+# Run neofetch at startup if we are in tmux
+# -----------------------------------------
+if [[ -n $TMUX ]]
+then
+	neofetch
+fi
+
+
+# Add paths for ORCA DFTB and MPI
+# -------------------------------
 export PATH=/Users/jamas/Library/Orca420:$PATH; export LD_LIBRARY_PATH=/Users/jamas/Library/Orca420:$LD_LIBRARY_PATH
-
 OPENMPI_PATH=/usr/local/Cellar/open-mpi/4.1.1_2/bin
 export PATH=$OPENMPI_PATH:$PATH; export LD_LIBRARY_PATH=$OPENMPI_PATH/lib:$LD_LIBRARY_PATH
 export ASE_ORCA_COMMAND='/Users/jamas/Library/Orca420'
-
 alias "dftb+"="/usr/local/Caskroom/miniforge/base/bin/dftb+"
 
