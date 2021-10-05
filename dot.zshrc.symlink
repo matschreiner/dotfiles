@@ -31,6 +31,18 @@ alias -g pw="fzf --color 'border:#008080' --preview 'bat --color=always --style=
 # alias -g Z='| fzf'
 
 
+
+# foo() {
+# 	h=$(tput lines)
+# 	echo $h
+# 	cp $1 /tmp/tmp
+# 	# bat /tmp/tmp | fzf --preview 'head -n $(( {n} + 1 + h / 2 )) /tmp/tmp | tail -10' --bind shift-up:preview-up,shift-down:preview-down
+# 	bat /tmp/tmp | fzf --preview 'echo {}' --bind shift-up:preview-up,shift-down:preview-down
+# }
+#cat /usr/share/dict/words | fzf --preview 'tail +$(( {n} + 1 )) /usr/share/dict/words | head -100'
+#"| head -100' < $1
+
+
 # Setup Plugins for zsh
 # ---------------------
 ZSH_THEME="robbyrussell"
