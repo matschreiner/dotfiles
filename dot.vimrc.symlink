@@ -4,7 +4,6 @@ echo "(>^.^<)"
 set nocompatible
 filetype plugin indent on
 
-
 " Updates
 " =======
 syntax on
