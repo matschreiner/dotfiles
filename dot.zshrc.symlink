@@ -15,6 +15,7 @@ alias new-venv='python -m venv .venv; activate; pip install --upgrade --quiet pi
 alias backup='rsync -a ~/pipelines/ ~/pipelines_backup'
 alias refresh='source $HOME/.zshrc'
 alias "combine_pdf"="/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py" -o
+alias research='cd ~/phd/research'
 
 
 # Setup ripgrep
@@ -27,7 +28,7 @@ alias rgf='rg --files | rg'
 export ZSH_DISABLE_COMPFIX=true
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 alias -g pw="fzf --color 'border:#008080' --preview 'bat --color=always --style=numbers {}' --bind shift-up:preview-up,shift-down:preview-down"
-# export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_DEFAULT_COMMAND='rg --files'
 # alias -g Z='| fzf'
 
 
