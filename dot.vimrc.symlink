@@ -8,6 +8,8 @@ set splitright
 " Autoread files whenever they are being changed outside vim
 set autoread
 filetype off
+GitGutter
+
 
 " Settings
 set rtp+=~/.vim/bundle/Vundle.vim
