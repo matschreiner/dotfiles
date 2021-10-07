@@ -27,6 +27,13 @@ set updatetime=100
 
 let @s="100|2hbi\"\\\<CR>f\"\<Esc>"
 
+augroup python
+    autocmd!
+    autocmd FileType python
+                \   syn keyword pythonExceptions self
+                \ | highlight def link pythonExceptions Special
+augroup end
+
 augroup BgHighlight
     autocmd!
     autocmd WinEnter,BufRead * set number
