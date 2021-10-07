@@ -8,15 +8,14 @@ set splitright
 " Autoread files whenever they are being changed outside vim
 set autoread
 filetype off
-GitGutter
 
+GitGutter
 
 " Settings
 set rtp+=~/.vim/bundle/Vundle.vim
 set number
 set encoding=utf-8
 
-" set columns=93
 set autoread
 set autowrite
 
@@ -97,89 +96,64 @@ au Filetype python
     \ set autoindent |
     \ set fileformat=unix |
 
+" Plugins
+" =======
 call vundle#begin()
-" Add plugins here
 Plugin 'VundleVim/Vundle.vim'
-
-" Send to pane only for tmux
-" Plugin 'vim-slime'
-Plugin 'jpalardy/vim-slime'
-
-" Nerdtree
-Plugin 'scrooloose/nerdtree'
-
-" Proper indentation
-Plugin 'vim-scripts/indentpython.vim'
-
-" Highligt first unique letter in each word when using f or t
-Plugin 'unblevable/quick-scope'
-
-" Colorscheme
-Plugin 'morhetz/gruvbox'
-
-" Black
-Plugin 'psf/black'
-
-" Rg
-Plugin 'junegunn/fzf', { 'do': './install --bin' }
-
-"fzf
-Plugin 'junegunn/fzf.vim'
-
+Plugin 'jpalardy/vim-slime' " Plugin 'vim-slime'
+Plugin 'scrooloose/nerdtree' " Nerdtree
+Plugin 'vim-scripts/indentpython.vim' " Proper indentation
+Plugin 'unblevable/quick-scope' " Highligt first unique letter
+Plugin 'morhetz/gruvbox' " Colorscheme
+Plugin 'psf/black' " Black
+Plugin 'junegunn/fzf', { 'do': './install --bin' } " Rg
+Plugin 'junegunn/fzf.vim' "fzf
 Plugin 'tpope/vim-surround'
-
-" for linting
-Plugin 'vim-syntastic/syntastic'
-
-" autocompletion of paranthesis
-Plugin 'Krasjet/auto.pairs'
-
+Plugin 'vim-syntastic/syntastic' " for linting
+Plugin 'Krasjet/auto.pairs' " autocompletion of paranthesis
 Plugin 'junegunn/vim-easy-align'
-
 Plugin 'airblade/vim-gitgutter'
-
-" Autocompletion and jump to definition
-Bundle 'Valloric/YouCompleteMe'
-
-Plugin 'preservim/nerdcommenter'
+Bundle 'Valloric/YouCompleteMe' " Autocompletion and jump to definition
+Plugin 'preservim/nerdcommenter' " Comment
 
 call vundle#end()
 
-" Plugin Settings
 " Slime
+" =====
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": 1}
 
 " Gruvbox
+" =======
 colorscheme gruvbox
 set background=dark
 syn keyword pythonExceptions self
 set t_Co=256
 
 " Nerd commenter
+" ==============
 let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 
-"Nerd tree
+" Nerd tree
+" =========
 let g:NERDTreeWinSize=37
 
-"YouCompleteMe
+" YouCompleteMe
+" =============
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
-
-"Easy Align
+" Easy Align
+" ==========
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
-"FZF
+" FZF
+" ===
 let $FZF_DEFAULT_COMMAND='rg --files'
-
-"GitGutter
-
 
 command! -bang -nargs=? -complete=dir Files
 			\ call fzf#vim#files(<q-args>, {'options': ['--tiebreak', 'end', '--info=inline', '--preview', 'bat --color=always --style=numbers {}']}, <bang>0)
-
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1,
@@ -189,6 +163,7 @@ let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 
 
 " Have persistent undo in vim
+" ===========================
 let vimDir = '$HOME/.vim'
 
 if stridx(&runtimepath, expand(vimDir)) == -1
