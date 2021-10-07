@@ -28,8 +28,13 @@ let @s="100|2hbi\"\\\<CR>f\"\<Esc>"
 
 augroup BgHighlight
     autocmd!
-    autocmd WinEnter * set number
+    autocmd WinEnter,BufRead * set number
     autocmd WinLeave * setlocal nonumber
+augroup END
+
+augroup UpdateGitGutter
+    autocmd!
+    autocmd WinEnter,BufRead * :GitGutter
 augroup END
 
 set statusline=%f
@@ -52,8 +57,6 @@ nmap <leader>gu <Plug>(GitGutterUndoHunk)
 
 nnoremap <leader>f :Files <CR>
 nnoremap <leader>s :Rg <CR>
-
-
 
 nmap <C-n> :NERDTreeToggle<CR>
 nnoremap <C-J> <C-W><C-J>
@@ -167,7 +170,6 @@ xmap ga <Plug>(EasyAlign)
 let $FZF_DEFAULT_COMMAND='rg --files'
 
 "GitGutter
-au FocusGained :GitGutter <CR>
 
 
 command! -bang -nargs=? -complete=dir Files
