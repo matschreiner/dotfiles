@@ -40,11 +40,6 @@ augroup BgHighlight
     autocmd WinLeave * setlocal nonumber
 augroup END
 
-augroup UpdateGitGutter
-    autocmd!
-    autocmd WinEnter,BufRead * :GitGutter
-augroup END
-
 set statusline=%f
 
 " Keymappings
