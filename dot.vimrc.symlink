@@ -7,7 +7,6 @@ filetype plugin indent on
 
 " Updates
 " =======
-GitGutter
 syntax on
 
 " Settings
