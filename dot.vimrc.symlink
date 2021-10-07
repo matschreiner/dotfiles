@@ -125,6 +125,8 @@ Plugin 'Krasjet/auto.pairs'
 
 Plugin 'junegunn/vim-easy-align'
 
+Plugin 'airblade/vim-gitgutter'
+
 " Autocompletion and jump to definition
 Bundle 'Valloric/YouCompleteMe'
 
