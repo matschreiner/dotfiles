@@ -58,6 +58,7 @@ noremap <leader><C-V> :set paste!<CR>
 nnoremap <leader>j J
 nmap <leader>p <Plug>(GitGutterPreviewHunk)
 nmap <leader>gu <Plug>(GitGutterUndoHunk)
+nnoremap ' "_
 
 nnoremap <leader>f :Files <CR>
 nnoremap <leader>s :Rg <CR>
@@ -113,7 +114,7 @@ Plugin 'vim-syntastic/syntastic' " for linting
 Plugin 'Krasjet/auto.pairs' " autocompletion of paranthesis
 Plugin 'junegunn/vim-easy-align'
 Plugin 'airblade/vim-gitgutter'
-Bundle 'Valloric/YouCompleteMe' " Autocompletion and jump to definition
+Plugin 'Valloric/YouCompleteMe' " Autocompletion and jump to definition
 Plugin 'preservim/nerdcommenter' " Comment
 
 call vundle#end()
