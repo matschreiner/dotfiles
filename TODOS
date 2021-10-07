@@ -1,6 +1,4 @@
-
 * dont occupy register hotkeys for vim x,s,c,d,
 * caps should have shorter release
-* remove right shift backspace mapping
 * write inspection command: rg --help | tee tmp | fzf --preview "bat tmp --color=always --style=numbers --highlight-line {n} --pager=\'less +{n} g\'"
 * set up git gutter
