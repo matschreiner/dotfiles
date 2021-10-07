@@ -170,7 +170,6 @@ let $FZF_DEFAULT_COMMAND='rg --files'
 au FocusGained :GitGutter <CR>
 
 
-
 command! -bang -nargs=? -complete=dir Files
 			\ call fzf#vim#files(<q-args>, {'options': ['--tiebreak', 'end', '--info=inline', '--preview', 'bat --color=always --style=numbers {}']}, <bang>0)
 
