@@ -3,6 +3,7 @@
 echo "(>^.^<)"
 set nocompatible
 filetype plugin indent on
+set splitright
 
 " Autoread files whenever they are being changed outside vim
 set autoread
