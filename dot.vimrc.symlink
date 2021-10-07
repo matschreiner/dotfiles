@@ -38,19 +38,22 @@ set statusline=%f
 let mapleader = ","
 
 " delete that doesn't occupy register
-nnoremap <leader>d "_d
 nnoremap <leader>r :checktime<CR>:so $MYVIMRC<CR>
-nnoremap <leader>p :vertical resize 93<CR>
-nnoremap <leader>s :Rg <CR>
 nnoremap <leader>v :e $MYVIMRC<CR>
 nnoremap <leader>V :!e $MYVIMRC<CR>
 nnoremap <leader>w :w <cr>
 nnoremap <leader>b :Black <cr>
-" nnoremap <leader>l :Black <cr> :w <cr> :SyntasticCheck <cr> :echo "saved" <cr>
 noremap / :set hlsearch <cr> /
 noremap <leader>/ :set hlsearch!<CR>
 noremap <leader><C-V> :set paste!<CR>
 nnoremap <leader>j J
+nmap <leader>p <Plug>(GitGutterPreviewHunk)
+nmap <leader>gu <Plug>(GitGutterUndoHunk)
+
+nnoremap <leader>f :Files <CR>
+nnoremap <leader>s :Rg <CR>
+
+
 
 nmap <C-n> :NERDTreeToggle<CR>
 nnoremap <C-J> <C-W><C-J>
@@ -161,8 +164,9 @@ nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
 "FZF
-"
 let $FZF_DEFAULT_COMMAND='rg --files'
+
+"Git gutter
 
 
 command! -bang -nargs=? -complete=dir Files
@@ -174,9 +178,6 @@ command! -bang -nargs=* Rg
   \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
-
-nnoremap <leader>f :Files <CR>
-nnoremap <leader>g :Rg <CR>
 
 
 " Have persistent undo in vim
