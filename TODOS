@@ -1,3 +1,2 @@
 * caps should have shorter release
 * write inspection command: rg --help | tee tmp | fzf --preview "bat tmp --color=always --style=numbers --highlight-line {n} --pager=\'less +{n} g\'"
-* set up git gutter
