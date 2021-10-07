@@ -166,7 +166,8 @@ xmap ga <Plug>(EasyAlign)
 "FZF
 let $FZF_DEFAULT_COMMAND='rg --files'
 
-"Git gutter
+"GitGutter
+au FocusGained :GitGutter <CR>
 
 
 command! -bang -nargs=? -complete=dir Files
