@@ -3,15 +3,15 @@
 echo "(>^.^<)"
 set nocompatible
 filetype plugin indent on
-set splitright
 
-" Autoread files whenever they are being changed outside vim
-set autoread
-filetype off
 
+" Updates
+" =======
 GitGutter
+syntax on
 
 " Settings
+" ========
 set rtp+=~/.vim/bundle/Vundle.vim
 set number
 set encoding=utf-8
@@ -23,8 +23,11 @@ set autowrite
 set sts=4
 set ts=4
 set sw=4
-
 set updatetime=100
+
+" Autoread files whenever they are being changed outside vim
+set autoread
+filetype off
 
 let @s="100|2hbi\"\\\<CR>f\"\<Esc>"
 
