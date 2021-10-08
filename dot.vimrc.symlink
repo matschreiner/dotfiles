@@ -29,6 +29,8 @@ filetype off
 
 let @s="100|2hbi\"\\\<CR>f\"\<Esc>"
 
+
+" Have python highlight self
 augroup python
     autocmd!
     autocmd FileType python
@@ -36,6 +38,7 @@ augroup python
                 \ | highlight def link pythonExceptions Special
 augroup end
 
+" Have numbers on the active window
 augroup BgHighlight
     autocmd!
     autocmd WinEnter,BufRead * set number
@@ -129,7 +132,6 @@ let g:slime_default_config = {"socket_name": "default", "target_pane": 1}
 " =======
 colorscheme gruvbox
 set background=dark
-syn keyword pythonExceptions self
 set t_Co=256
 
 " Nerd commenter
