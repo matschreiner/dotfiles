@@ -1,2 +1,6 @@
 * caps should have shorter release
 * write inspection command: rg --help | tee tmp | fzf --preview "bat tmp --color=always --style=numbers --highlight-line {n} --pager=\'less +{n} g\'"
+include <leader> something to remove breakpoints from file. Should be easy
+make some fzf script to search recent terminal history eg. cd -#
+find out how to clear cache in NERDtree
+abbreviate boiler plate
