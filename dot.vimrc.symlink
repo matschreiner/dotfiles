@@ -3,6 +3,7 @@
 echo "(>^.^<)"
 set nocompatible
 filetype plugin indent on
+set splitright
 
 " Updates
 " =======
@@ -60,7 +61,7 @@ noremap / :set hlsearch <cr> /
 noremap <leader>/ :set hlsearch!<CR>
 noremap <leader><C-V> :set paste!<CR>
 nnoremap <leader>j J
-nmap <leader>p <Plug>(GitGutterPreviewHunk)
+nmap <leader>gp <Plug>(GitGutterPreviewHunk)
 nmap <leader>gu <Plug>(GitGutterUndoHunk)
 nnoremap ' "_
 
@@ -73,7 +74,6 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-B>  :YcmCompleter GoToDeclaration <CR>
-nnoremap <C-S>  :YcmCompleter config.yaml GoToDeclaration <CR>
 noremap <C-X> :call NERDComment(-1,"toggle")<CR>
 
 " Turbomove
@@ -87,6 +87,7 @@ inoremap JK <ESC>
 
 " Abbreviations
 iabbr bp import pdb; pdb.set_trace()
+iabbr pytarg from argparse import ArgumentParser<cr><cr><cr>def main(args):<cr>pass<cr><cr><cr>if __name__ == "__main__":<cr>parser = ArgumentParser()<cr>parser.add_argument()<cr>args = parser.parse_args()<cr><cr>main(args)
 
 " source .vimrc after saving it
 au bufwritepost .vimrc source $MYVIMRC
