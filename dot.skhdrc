@@ -1,0 +1,2 @@
+cmd - h : yabai -m space --focus previous
+cmd - l : yabai -m space --focus next
