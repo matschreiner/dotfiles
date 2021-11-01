@@ -5,10 +5,6 @@ set nocompatible
 filetype plugin indent on
 set splitright
 
-" Updates
-" =======
-syntax on
-
 " Settings
 " ========
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -63,7 +59,9 @@ noremap <leader><C-V> :set paste!<CR>
 nnoremap <leader>j J
 nmap <leader>gp <Plug>(GitGutterPreviewHunk)
 nmap <leader>gu <Plug>(GitGutterUndoHunk)
+nmap <leader>gg :GitGutterToggle <cr>
 nnoremap ' "_
+nmap <leader>pi $A # pylint: disable=<Esc>"+p
 
 nnoremap <leader>f :Files <CR>
 nnoremap <leader>s :Rg <CR>
@@ -121,6 +119,7 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Valloric/YouCompleteMe' " Autocompletion and jump to definition
 Plugin 'preservim/nerdcommenter' " Comment
+
 
 call vundle#end()
 
@@ -185,3 +184,8 @@ if has('persistent_undo')
 	let &undodir = myUndoDir
 	set undofile
 endif
+
+
+" Updates
+" =======
+syntax on
