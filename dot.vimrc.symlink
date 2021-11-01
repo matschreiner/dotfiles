@@ -57,9 +57,6 @@ noremap / :set hlsearch <cr> /
 noremap <leader>/ :set hlsearch!<CR>
 noremap <leader><C-V> :set paste!<CR>
 nnoremap <leader>j J
-nmap <leader>gp <Plug>(GitGutterPreviewHunk)
-nmap <leader>gu <Plug>(GitGutterUndoHunk)
-nmap <leader>gg :GitGutterToggle <cr>
 nnoremap ' "_
 nmap <leader>pi $A # pylint: disable=<Esc>"+p
 
@@ -151,6 +148,14 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 " ==========
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
+
+" GitGutter
+" =========
+nmap <leader>gp <Plug>(GitGutterPreviewHunk)
+nmap <leader>gu <Plug>(GitGutterUndoHunk)
+nmap <leader>gg :GitGutterToggle <cr>
+let g:gitgutter_enabled = 0
+
 
 " FZF
 " ===
