@@ -70,6 +70,8 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-B>  :YcmCompleter GoToDeclaration <CR>
 noremap <C-X> :call NERDComment(-1,"toggle")<CR>
+noremap zi :NERDTreeClose<Cr><C-W>\|<C-W>\_
+noremap zo :NERDTree<Cr><C-W>=
 
 " Turbomove
 noremap J 5j
@@ -116,9 +118,23 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Valloric/YouCompleteMe' " Autocompletion and jump to definition
 Plugin 'preservim/nerdcommenter' " Comment
-
-
+Plugin 'davidhalter/jedi-vim'
 call vundle#end()
+
+" Jedi
+" ====
+let g:jedi#show_call_signatures = "1"
+let g:jedi#popup_on_dot = "0"
+let g:jedi#goto_command = ""
+let g:jedi#goto_assignments_command = ""
+let g:jedi#goto_stubs_command = ""
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = ""
+let g:jedi#usages_command = ""
+let g:jedi#completions_command = ""
+let g:jedi#rename_command = "<leader>R"
+
+
 
 " Slime
 " =====
