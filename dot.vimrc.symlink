@@ -27,14 +27,6 @@ filetype off
 let @s="100|2hbi\"\\\<CR>f\"\<Esc>"
 
 
-" Have python highlight self
-augroup python
-    autocmd!
-    autocmd FileType python
-                \   syn keyword pythonExceptions self
-                \ | highlight def link pythonExceptions Special
-augroup end
-
 " Have numbers on the active window
 augroup BgHighlight
     autocmd!
@@ -211,3 +203,12 @@ endif
 " Updates
 " =======
 syntax on
+
+" Have python highlight self
+augroup python
+    autocmd!
+    autocmd FileType python
+                \   syn keyword pythonExceptions self
+                \ | highlight def link pythonExceptions Special
+augroup end
+
