@@ -1,9 +1,11 @@
 " General settings
 "
+
 echo "(>^.^<)"
 set nocompatible
 filetype plugin indent on
 set splitright
+set nowrap
 
 " Settings
 " ========
@@ -44,7 +46,7 @@ nnoremap <leader>r :checktime<CR>:so $MYVIMRC<CR>
 nnoremap <leader>v :e $MYVIMRC<CR>
 nnoremap <leader>V :!e $MYVIMRC<CR>
 nnoremap <leader>w :w <cr>
-nnoremap <leader>b :Black <cr>
+nnoremap <leader>b :Black <cr> :Isort <cr>
 noremap / :set hlsearch <cr> /
 noremap <leader>/ :set hlsearch!<CR>
 noremap <leader><C-V> :set paste!<CR>
@@ -62,6 +64,8 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-B>  :YcmCompleter GoToDeclaration <CR>
 noremap <C-X> :call NERDComment(-1,"toggle")<CR>
+
+" Zoom in Zoom out
 noremap zi :NERDTreeClose<Cr><C-W>\|<C-W>\_
 noremap zo :NERDTree<Cr><C-W>=
 
@@ -73,11 +77,16 @@ noremap H 5h
 
 inoremap jk <ESC>
 inoremap JK <ESC>
+inoremap Jk <ESC>
+inoremap jK <ESC>
+
+vnoremap <leader>p "\xp<cr>
 
 " Abbreviations
 iabbr bp __import__("pdb").set_trace() #TODO delme
 iabbr pytarg from argparse import ArgumentParser<cr><cr><cr>def main(args):<cr>pass<cr><cr><cr>if __name__ == "__main__":<cr>parser = ArgumentParser()<cr>parser.add_argument()<cr>args = parser.parse_args()<cr><cr>main(args)
 iabbr pypejob from pype import BaseConfig<cr><cr><cr>class Config(BaseConfig):<cr>script_path = ...<cr>outputs = {}<cr><bs><cr><cr>def main(config):<cr>pass
+iabbr delme # TODO delme ##########<cr>#######################
 
 " source .vimrc after saving it
 au bufwritepost .vimrc source $MYVIMRC
@@ -112,6 +121,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'Valloric/YouCompleteMe' " Autocompletion and jump to definition
 Plugin 'preservim/nerdcommenter' " Comment
 Plugin 'davidhalter/jedi-vim'
+Plugin 'fisadev/vim-isort'
 call vundle#end()
 
 " Jedi
@@ -162,13 +172,16 @@ xmap ga <Plug>(EasyAlign)
 " =========
 nmap <leader>gp <Plug>(GitGutterPreviewHunk)
 nmap <leader>gu <Plug>(GitGutterUndoHunk)
+nmap <leader>gj <Plug>(GitGutterNextHunk)
+nmap <leader>gk <Plug>(GitGutterPrevHunk)
+
 nmap <leader>gg :GitGutterToggle <cr>
 let g:gitgutter_enabled = 0
 
 
 " FZF
 " ===
-let $FZF_DEFAULT_COMMAND='rg --files'
+let $FZF_DEFAULT_COMMAND='rg --files --follow'
 
 command! -bang -nargs=? -complete=dir Files
 			\ call fzf#vim#files(<q-args>, {'options': ['--tiebreak', 'end', '--info=inline', '--preview', 'bat --color=always --style=numbers {}']}, <bang>0)
