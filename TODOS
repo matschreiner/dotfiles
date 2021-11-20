@@ -4,14 +4,14 @@
 
 include <leader> something to remove breakpoints from file. Should be easy
 
-make some fzf script to search recent terminal history eg. cd -#
+Make some fzf script to search recent terminal history eg. cd -#
 
-find out how to clear cache in NERDtree
-
-abbreviate boiler plate
+Find out how to clear cache in NERDtree
 
 Install spotify TUI
 
 Move between vim and tmux windows with CTRL
 
 Have a look at some configuration for yabai: https://www.notion.so/Yabai-8da3b829872d432fac43181b7ff628fc
+
+Have fzf follow symlinks
