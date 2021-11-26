@@ -15,7 +15,7 @@ alias new-venv='python -m venv .venv; activate; pip install --upgrade --quiet pi
 alias backup='rsync -a ~/pipelines/ ~/pipelines_backup'
 alias refresh='source $HOME/.zshrc'
 alias "combine_pdf"="/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py" -o
-alias research='cd ~/phd/research'
+alias re='cd ~/phd/research'
 
 
 # Setup ripgrep
