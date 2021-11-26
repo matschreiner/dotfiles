@@ -46,7 +46,7 @@ nnoremap <leader>r :checktime<CR>:so $MYVIMRC<CR>
 nnoremap <leader>v :e $MYVIMRC<CR>
 nnoremap <leader>V :!e $MYVIMRC<CR>
 nnoremap <leader>w :w <cr>
-nnoremap <leader>b :Black <cr> :Isort <cr>
+nnoremap <leader>b :Black <cr>
 noremap / :set hlsearch <cr> /
 noremap <leader>/ :set hlsearch!<CR>
 noremap <leader><C-V> :set paste!<CR>
