@@ -15,3 +15,5 @@ Move between vim and tmux windows with CTRL
 Have a look at some configuration for yabai: https://www.notion.so/Yabai-8da3b829872d432fac43181b7ff628fc
 
 Have fzf follow symlinks
+
+Handle nested TMUX on server: https://www.freecodecamp.org/news/tmux-in-practice-local-and-nested-remote-tmux-sessions-4f7ba5db8795/
