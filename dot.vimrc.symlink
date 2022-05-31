@@ -51,6 +51,7 @@ noremap / :set hlsearch <cr> /
 noremap <leader>/ :set hlsearch!<CR>
 noremap <leader><C-V> :set paste!<CR>
 nnoremap <leader>j J
+nnoremap <leader>. :<up><cr>
 nnoremap ' "_
 nmap <leader>pi $A # pylint: disable=<Esc>"+p
 
