@@ -126,10 +126,11 @@ Plugin 'morhetz/gruvbox' " Colorscheme
 Plugin 'psf/black' " Black
 Plugin 'junegunn/fzf', { 'do': './install --bin' } " Rg
 Plugin 'junegunn/fzf.vim' "fzf
+Plugin 'junegunn/vim-easy-align'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat' " Let Vim Surround repeat actions
 Plugin 'vim-syntastic/syntastic' " for linting
 Plugin 'Krasjet/auto.pairs' " autocompletion of paranthesis
-Plugin 'junegunn/vim-easy-align'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Valloric/YouCompleteMe' " Autocompletion and jump to definition
 Plugin 'preservim/nerdcommenter' " Comment
