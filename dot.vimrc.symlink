@@ -85,6 +85,10 @@ inoremap Jk <ESC>
 inoremap jK <ESC>
 
 vnoremap <leader>p "\xp<cr>
+vnoremap <leader>rl y:s/<C-R>"//g<left><left>
+vnoremap <leader>rg y:%s/<C-R>"//g<left><left>
+vnoremap <leader>rc y:%s/<C-R>"//gc<left><left><left>
+vnoremap <leader>ry :s/<C-R>"//g<left><left>
 
 " Abbreviations
 iabbr bp __import__("pdb").set_trace() #TODO delme
