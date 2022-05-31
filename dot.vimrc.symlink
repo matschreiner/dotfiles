@@ -141,7 +141,7 @@ call vundle#end()
 " Jedi
 " ====
 let g:jedi#show_call_signatures = "1"
-let g:jedi#popup_on_dot = "0"
+let g:jedi#popup_on_dot = "1"
 let g:jedi#goto_command = ""
 let g:jedi#goto_assignments_command = ""
 let g:jedi#goto_stubs_command = ""
