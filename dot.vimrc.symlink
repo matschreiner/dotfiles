@@ -32,8 +32,9 @@ let @s="100|2hbi\"\\\<CR>f\"\<Esc>"
 " Have numbers on the active window
 augroup BgHighlight
     autocmd!
-    autocmd WinEnter,BufRead * set number
-    autocmd WinLeave * setlocal nonumber
+    autocmd WinEnter,BufRead * set nu rnu
+
+    autocmd WinLeave * setlocal nonu nornu
 augroup END
 
 set statusline=%f
