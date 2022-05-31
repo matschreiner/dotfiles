@@ -25,21 +25,38 @@
                ]
        }
 
-      {:des "hold z for n-mode"
+      {:des "hold !Sz for number-mode"
        :rules [
-               [:z ["n-mode" 1] nil {:afterup ["n-mode" 0] :alone :z}]
-               [:o :9 ["n-mode" 1]]
-               [:i :8 ["n-mode" 1]]
-               [:u :7 ["n-mode" 1]]
-               [:l :6 ["n-mode" 1]]
-               [:k :5 ["n-mode" 1]]
-               [:j :4 ["n-mode" 1]]
-               [:period :3 ["n-mode" 1]]
-               [:comma :2 ["n-mode" 1]]
-               [:m :1 ["n-mode" 1]]
-               [:slash :0 ["n-mode" 1]]
-               [:x :comma ["n-mode" 1]]
-               [:c :period ["n-mode" 1]]
+               [:!Sz ["number-mode" 1] nil {:afterup ["number-mode" 0] :alone :!Sz}]
+               [:!So :9 ["number-mode" 1]]
+               [:!Si :8 ["number-mode" 1]]
+               [:!Su :7 ["number-mode" 1]]
+               [:!Sl :6 ["number-mode" 1]]
+               [:!Sk :5 ["number-mode" 1]]
+               [:!Sj :4 ["number-mode" 1]]
+               [:!Speriod :3 ["number-mode" 1]]
+               [:!Scomma :2 ["number-mode" 1]]
+               [:!Sm :1 ["number-mode" 1]]
+               [:!Sslash :0 ["number-mode" 1]]
+               [:!Sx :comma ["number-mode" 1]]
+               [:!Sc :period ["number-mode" 1]]
+               ]
+       }
+
+      {:des "hold z for symbols-mode"
+       :rules [
+               [:z ["symbols-mode" 1] nil {:afterup ["symbols-mode" 0] :alone :z}]
+               [:i :open_bracket ["symbols-mode" 1]]
+               [:o :close_bracket ["symbols-mode" 1]]
+               [:k :!S9 ["symbols-mode" 1]]
+               [:l :!S0 ["symbols-mode" 1]]
+               [:comma :!Sopen_bracket ["symbols-mode" 1]]
+               [:period :!Sclose_bracket ["symbols-mode" 1]]
+               [:j :equal_sign ["symbols-mode" 1]]
+               [:m :!Shyphen ["symbols-mode" 1]]
+               [:slash :0 ["symbols-mode" 1]]
+               [:x :comma ["symbols-mode" 1]]
+               [:c :period ["symbols-mode" 1]]
                ]
        }
 ]}
