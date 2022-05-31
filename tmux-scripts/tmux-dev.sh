@@ -3,7 +3,7 @@
 function activate_venv () {
 	if [[ -d ./.venv ]]
 	then
-		tmux send-keys 'source .venv/bin/activate' Enter
+		tmux send-keys 'source venv/bin/activate' Enter
 	fi
 }
 
