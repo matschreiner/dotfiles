@@ -37,6 +37,9 @@ augroup BgHighlight
     autocmd WinLeave * setlocal nonu nornu
 augroup END
 
+
+au FileType python :iabbr <buffer> iff if:<left><space>
+
 set statusline=%f
 
 " Keymappings
@@ -65,6 +68,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-B>  :YcmCompleter GoToDeclaration <CR>
+
 nnoremap - ddp
 nnoremap _ ddkkp
 
