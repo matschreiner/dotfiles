@@ -64,6 +64,9 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-B>  :YcmCompleter GoToDeclaration <CR>
+nnoremap - ddp
+nnoremap _ ddkkp
+
 noremap <C-X> :call NERDComment(-1,"toggle")<CR>
 
 " Zoom in Zoom out
