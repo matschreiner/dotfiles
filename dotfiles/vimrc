@@ -41,20 +41,6 @@ augroup BgHighlight
     autocmd WinLeave * setlocal nonu nornu
 augroup END
 
-function! GetLastMessageLine()
-    redir => messages_output
-    silent! messages
-    redir END
-    let message_lines = split(messages_output, '\n')
-    let last_message_line = message_lines[-1]
-    return last_message_line
-endfunction
-
-" Gitgutter
-" =========
-nnoremap gt :GitGutterToggle<cr>
-nnoremap gp <Plug>(GitGutterPreviewHunk)
-nnoremap gu <Plug>(GitGutterUndoHunk)
 
 nnoremap <leader>w :set wrap!<CR>
 nnoremap <leader>r :checktime<CR>:so $MYVIMRC<CR>
@@ -63,17 +49,7 @@ nnoremap <leader>b :Isort <cr> :Black <cr>
 nnoremap <leader>/ :set hlsearch!<CR>
 nnoremap <leader>j J
 
-function! GetLastMessageLine()
-    let message_lines = split(execute('messages'), '\n')
-    let last_message_line = message_lines[-1]
-    return last_message_line
-endfunction
 
-nnoremap <leader>pi A  # pylint: disable=<Esc>:execute "normal! a" . split(GetLastMessageLine(), ":")[0]<CR>
-
-
-
-nnoremap <key> :let @a=GetLastMessageLine()<CR>
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -87,20 +63,16 @@ nnoremap <leader>S :SlimeConfig<cr>default<cr>1
 nnoremap <leader>c :let @+ = expand('%')<cr>
 
 
-" lua require('leap').add_default_mappings()
-
 " INSERT MAPS
 " ===========
 inoremap jk <ESC>
 inoremap JK <ESC>
 inoremap Jk <ESC>
 inoremap jK <ESC>
-inoremap >> <Plug>(copilot-next)
-inoremap << <Plug>(copilot-previous)
 
 " CLIPBOARD
 " =========
-vnoremap <leader>j "+p
+vnoremap <leader>p "+p
 vnoremap <leader>d "+d
 vnoremap <leader>y "+y
 nnoremap <leader>p "+p
@@ -114,27 +86,12 @@ vnoremap <leader>rg y:%s/<C-R>"//g<left><left>
 vnoremap <leader>rc y:%s/<C-R>"//gc<left><left><left>
 vnoremap <leader>ry :s/<C-R>"//g<left><left>
 
-vnoremap <leader>ofr sopen(x, 'r')<esc>Fxvp
-vnoremap <leader>ofw sopen(x, 'w')<esc>Fxvp
-vnoremap <leader>ofa sopen(x, 'a')<esc>Fxvp
-vnoremap <leader>ofbr sopen(x, 'rb')<esc>Fxvp
-vnoremap <leader>ofbw sopen(x, 'wb')<esc>Fxvp
-vnoremap <leader>ofba sopen(x, 'ab')<esc>Fxvp
-
 vnoremap <leader>enum senumerate()<esc>P?for\s<cr>3lai, <esc>/enumerate<cr>
 vnoremap <leader>arg xmai()<esc>P`ai
 vnoremap <leader>next snext(iter(<esc>pa))<esc>
 vnoremap <leader>fmtoff dO# fmt: off<cr># fmt: on<esc>P
 vnoremap <leader>try Itry:<cr><esc>oexcept:<cr>__import__("pdb").set_trace() #TODO delme<esc>
-
-" vnoremap <leader>pytarg >O<esc>I<cr><cr><cr>def main(args):<esc>ggOfrom argparse import ArgumentParser<esc>Go<esc>I<cr><cr>if __name__ == "__main__":<cr>parser = ArgumentParser()<cr># parser.add_argument('arg')<cr># parser.add_argument('--kwarg')<cr><cr>main(parser.parse_args())<esc>`ai<tab>
 vnoremap <leader>ifmain >O<esc>Iif __name__ == "__main__":<cr>main()
-
-
-" Always use visual lines vim
-" ===========================
-nmap k gk
-nmap j gj
 
 
 " Turbomove
@@ -191,37 +148,11 @@ Plugin 'preservim/nerdtree' " Comment
 Plugin 'fisadev/vim-isort'
 Plugin 'nvim-tree/nvim-web-devicons' " optional, for file icons
 Plugin 'github/copilot.vim'
-" Plugin 'Valloric/YouCompleteMe' " Autocompletion and jump to definition
 Plugin 'vim-airline/vim-airline'
 "
 call vundle#end()
 
-nnoremap <leader>ee NERDTreeToggle
-" Unused
-" Plugin 'nvim-tree/nvim-tree.lua'
-" Plugin 'SirVer/ultisnips'
-" Plugin 'honza/vim-snippets'
-" Plugin 'ggandor/leap.nvim'
-" Plugin 'neovim/nvim-lspconfig'
-
-
-" ALE
-" ===
-nnoremap - :ALENext<cr>
-nnoremap _ :ALEPrevious<cr>
-
-
-" YouCompleteMe
-" =============
-nnoremap <C-B> :YcmCompleter GoToDeclaration <CR>
-" let g:ycm_goto_buffer_command = 'new-tab'
-" let g:ycm_auto_trigger=1
-" let g:ycm_autoclose_preview_window_after_insertion = 1
-
-
-" SnipMate
-let g:UltiSnipsExpandTrigger="<TAB>"
-
+nnoremap <leader>ee :NERDTreeToggle<cr>
 
 " Easy Align
 " ==========
@@ -240,9 +171,9 @@ set t_Co=256
 
 " FZF/rg
 " ======
-nnoremap <leader>f :Files <CR>
+nnoremap <leader>ff :Files <CR>
 nnoremap + :Buffers<cr>
-nnoremap <leader>s :Rg <CR>
+nnoremap <leader>fs :Rg <CR>
 
 " Nerd commenter
 " ==============
@@ -263,14 +194,6 @@ let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeDirArrows = 1
 "
-" LazyGit
-" =======
-let g:lazygit_floating_window_winblend = 0 " transparency of floating window
-let g:lazygit_floating_window_scaling_factor = 0.9 " scaling factor for floating window
-let g:lazygit_floating_window_corner_chars = ['╭', '╮', '╰', '╯'] " customize lazygit popup window corner characters
-let g:lazygit_floating_window_use_plenary = 0 " use plenary.nvim to manage floating window if available
-let g:lazygit_use_neovim_remote = 1 " fallback to 0 if neovim-remote is not installed
-
 
 " GitGutter
 " =========
@@ -283,37 +206,3 @@ let $FZF_DEFAULT_COMMAND='rg --files'
 command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
-
-
-" Jedi
-" ====
-" Plugin 'davidhalter/jedi-vim'
-" let g:jedi#show_call_signatures = "1"
-" let g:jedi#popup_on_dot = "0"
-" let g:jedi#goto_command = ""
-" let g:jedi#goto_assignments_command = ""
-" let g:jedi#goto_stubs_command = ""
-" let g:jedi#goto_definitions_command = ""
-" let g:jedi#usages_command = ""
-" let g:jedi#completions_command = ""
-" let g:jedi#rename_command = "<leader>R"
-" let g:jedi#documentation_command = "<leader>h"
-
-
-" Have persistent undo in vim
-" ===========================
-let vimDir = '$HOME/.vim'
-
-if stridx(&runtimepath, expand(vimDir)) == -1
-  let &runtimepath.=','.vimDir
-endif
-if has('persistent_undo')
-	let myUndoDir = expand(vimDir . '/undodir')
-	:silent call system('mkdir ' . vimDir)
-	:silent call system('mkdir ' . myUndoDir)
-	let &undodir = myUndoDir
-	set undofile
-endif
-
-
-syntax on
