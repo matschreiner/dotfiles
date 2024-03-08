@@ -195,6 +195,8 @@ Plugin 'github/copilot.vim'
 Plugin 'vim-airline/vim-airline'
 "
 call vundle#end()
+
+nnoremap <leader>ee NERDTreeToggle
 " Unused
 " Plugin 'nvim-tree/nvim-tree.lua'
 " Plugin 'SirVer/ultisnips'
