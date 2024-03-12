@@ -9,3 +9,6 @@ disable=
     too-many-instance-attributes,
     line-too-long,
     too-many-statements
+
+
+good-names-rgxs=[_a-zA-Z][_a-zA-Z0-9]?$
