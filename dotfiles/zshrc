@@ -24,3 +24,51 @@ plugins=(
 	# fzf
 )
 source $ZSH/oh-my-zsh.sh
+
+
+eval "$(fzf --zsh)"
+bindkey '^R' fzf-history-widget
+
+rbl() {
+    rsync -avP --exclude='md/' x_jacsc@berzelius1.nsc.liu.se:/proj/berzelius-2023-202/mathias/tito/$1 $1
+}
+
+rblr() {
+    rsync -avP --exclude='md/' x_jacsc@berzelius1.nsc.liu.se:/proj/berzelius-2023-202/mathias/$(basename $(pwd))/results/ results/
+}
+
+rlb() {
+    rsync -avP $1/ x_jacsc@berzelius1.nsc.liu.se:/proj/berzelius-2023-202/mathias/tito/$1
+}
+
+lsd() {
+  echo "Hi"
+  if [ "$#" -eq 0 ]; then
+    /bin/ls -d "$PWD"/*
+  else
+    /bin/ls -d "$PWD"/$1/*
+  fi
+}
+
+
+alias rbe="rsync -avP x_jacsc@berzelius1.nsc.liu.se:/proj/berzelius-2023-202/mathias/tito/experiments/ /Users/jacobsch/programming/tito/experiments"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/jacobsch/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/jacobsch/mambaforge/etc/profile.d/conda.sh" ]; then
+        . "/Users/jacobsch/mambaforge/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/jacobsch/mambaforge/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+if [ -f "/Users/jacobsch/mambaforge/etc/profile.d/mamba.sh" ]; then
+    . "/Users/jacobsch/mambaforge/etc/profile.d/mamba.sh"
+fi
+# <<< conda initialize <<<
+
