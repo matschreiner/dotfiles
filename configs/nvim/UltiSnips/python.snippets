@@ -3,7 +3,7 @@ from argparse import ArgumentParser
 
 
 def main(args):  # pylint: disable=unused-argument
-	$1
+	${1:pass}
 
 
 if __name__ == "__main__":
@@ -17,3 +17,14 @@ if __name__ == "__main__":
 
     main(parser.parse_args())
 endsnippet
+
+
+snippet ifmain
+# pylint: disable=import-outside-toplevel
+def main():
+	${1:pass}
+
+if __name__ == "__main__":
+	main()
+endsnippet
+

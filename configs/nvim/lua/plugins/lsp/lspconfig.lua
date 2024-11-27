@@ -54,8 +54,26 @@ return {
             opts.desc = "Restart LSP"
             vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 
-            -- opts.desc = "Format"
-            -- vim.keymap.set("n", "<leader>b", vim.lsp.buf.format, opts)     -- mapping to restart lsp if necessary
+            vim.diagnostic.config({
+                virtual_text = {
+                    format = function(diagnostic)
+                        -- Initialize the message with the diagnostic message
+                        local msg = diagnostic.message
+
+                        -- Check if diagnostic.code is not nil and append it to the message
+                        if diagnostic.code then
+                            msg = msg .. " [" .. diagnostic.code .. "]"
+                        end
+
+                        -- Optionally, you can also include the source if it's available
+                        if diagnostic.source then
+                            msg = msg .. " (" .. diagnostic.source .. ")"
+                        end
+
+                        return msg
+                    end,
+                },
+            })
         end
 
         -- used to enable autocompletion (assign to every lsp server config)
@@ -69,11 +87,23 @@ return {
             vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
         end
 
-        -- -- configure python server
-        -- lspconfig["pyright"].setup({
-        --     capabilities = capabilities,
-        --     on_attach = on_attach,
-        -- })
+        -- configure python server
+        lspconfig["pyright"].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+            settings = {
+                python = {
+                    analysis = {
+                        diagnosticSeverityOverrides = {
+                            reportAttributeAccessIssue = "none", -- Disable this diagnostic
+                            reportCallIssue = "none", -- Disable this diagnostic
+                        },
+                        -- reportAttributeAccessIssue = "none", -- Disable this diagnostic
+                        -- -- Add other settings here
+                    },
+                },
+            },
+        })
 
         -- configure lua server (with special settings)
         lspconfig["lua_ls"].setup({
