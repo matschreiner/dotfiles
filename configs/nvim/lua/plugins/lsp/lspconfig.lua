@@ -98,8 +98,7 @@ return {
                             reportAttributeAccessIssue = "none", -- Disable this diagnostic
                             reportCallIssue = "none", -- Disable this diagnostic
                         },
-                        -- reportAttributeAccessIssue = "none", -- Disable this diagnostic
-                        -- -- Add other settings here
+                        typeCheckingMode = "off",
                     },
                 },
             },
