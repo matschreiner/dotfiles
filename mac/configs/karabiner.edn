@@ -16,24 +16,6 @@
          }
 
 
-      ; {:des "hold !Sz for number-mode"
-      ;  :rules [
-      ;          [:!Sz ["number-mode" 1] nil {:afterup ["number-mode" 0] :alone :!Sz}]
-      ;          [:!So :9 ["number-mode" 1]]
-      ;          [:!Si :8 ["number-mode" 1]]
-      ;          [:!Su :7 ["number-mode" 1]]
-      ;          [:!Sl :6 ["number-mode" 1]]
-      ;          [:!Sk :5 ["number-mode" 1]]
-      ;          [:!Sj :4 ["number-mode" 1]]
-      ;          [:!Speriod :3 ["number-mode" 1]]
-      ;          [:!Scomma :2 ["number-mode" 1]]
-
-      ;          [:!Sslash :0 ["number-mode" 1]]
-      ;          [:!Sx :comma ["number-mode" 1]]
-      ;          [:!Sc :period ["number-mode" 1]]
-      ;          ]
-      ;  }
-
       {:des "hold z for number-mode"
        :rules [
                [:z ["number-mode" 1] nil {:afterup ["number-mode" 0] :alone :z}]
@@ -70,20 +52,6 @@
          [:comma  :!Sopen_bracket  :symbols-mode]
          [:period :!Sclose_bracket :symbols-mode]
           ]}
-
-        ; {:des "numpad"
-        ;  :rules    [:number-mode
-        ;  [:o      :9 :number-mode]
-        ;  [:i      :8 :number-mode]
-        ;  [:u      :7 :number-mode]
-        ;  [:l      :6 :number-mode]
-        ;  [:k      :5 :number-mode]
-        ;  [:j      :4 :number-mode]
-        ;  [:period :3 :number-mode]
-        ;  [:comma  :2 :number-mode]
-        ;  [:m      :1 :number-mode]
-        ;  [:slash  :0 :number-mode]
-        ;  ]}
 
         {:des "hold q for utils mode"
          :rules [
