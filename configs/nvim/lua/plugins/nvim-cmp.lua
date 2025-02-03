@@ -5,8 +5,8 @@ return {
         "hrsh7th/cmp-buffer", -- source for text in buffer
         "hrsh7th/cmp-path", -- source for file system paths
         "onsails/lspkind.nvim", -- vs-code like pictograms
-        "SirVer/ultisnips", -- snippet engine
-        "quangnguyen30192/cmp-nvim-ultisnips", -- for autocompletion
+        -- "SirVer/ultisnips", -- snippet engine
+        -- "quangnguyen30192/cmp-nvim-ultisnips", -- for autocompletion
     },
     config = function()
         local cmp = require("cmp")
@@ -16,11 +16,11 @@ return {
             completion = {
                 completeopt = "menu,menuone,preview,noselect",
             },
-            snippet = {
-                expand = function(args)
-                    vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-                end,
-            },
+            -- snippet = {
+            --     expand = function(args)
+            --         vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+            --     end,
+            -- },
             mapping = cmp.mapping.preset.insert({
                 ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
                 ["<C-e>"] = cmp.mapping.abort(), -- close completion window
@@ -30,7 +30,7 @@ return {
             -- sources for autocompletion
             sources = cmp.config.sources({
                 { name = "nvim_lsp" },
-                { name = "ultisnips" }, -- snippets
+                -- { name = "ultisnips" }, -- snippets
                 { name = "buffer" }, -- text within current buffer
                 { name = "path" }, -- file system paths
             }),
