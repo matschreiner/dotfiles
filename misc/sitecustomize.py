@@ -1,6 +1,11 @@
-import lovely_tensors as lt
 import tbvaccine
 
 tbvaccine.add_hook(show_vars=False)
 
-lt.monkey_patch()
+
+try:
+    import lovely_tensors as lt
+
+    lt.monkey_patch()
+except ImportError:
+    pass
