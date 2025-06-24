@@ -1,11 +1,14 @@
+from argparse import ArgumentParser
+
+import lovely_tensors as lt
 import tbvaccine
 
-tbvaccine.add_hook(show_vars=False)
+parser = ArgumentParser()
+parser.add_argument(
+    "--show_vars", action="store_true", help="Show variables in the output"
+)
 
+args = parser.parse_args()
 
-try:
-    import lovely_tensors as lt
-
-    lt.monkey_patch()
-except ImportError:
-    pass
+lt.monkey_patch()
+tbvaccine.add_hook(isolate=True, show_vars=args.show_vars)
