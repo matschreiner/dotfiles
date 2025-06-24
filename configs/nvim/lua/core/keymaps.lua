@@ -42,6 +42,9 @@ keymap.set("v", "<leader>enum", "senumerate()<esc>P?for\\s<cr>3lai, <esc>/enumer
 keymap.set("v", "<leader>arg", "xmai()<esc>P`ai")
 keymap.set("v", "<leader>next", "snext(iter(<esc>pa))<esc>")
 
+vim.cmd(
+    [[iabbr tomltool [tool.black]<CR>line-length = 120<CR><CR>[tool.isort]<CR>line_length = 120<CR>project = "anemoi"<CR>force_single_line = true]]
+)
 vim.cmd([[iabbr bp __import__("pdb").set_trace() #TODO delme]])
 vim.cmd([[iabbr sysexit __import__("sys").exit() #TODO delme]])
 vim.cmd([[iabbr imnp import numpy as np]])
