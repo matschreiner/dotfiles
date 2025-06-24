@@ -20,6 +20,10 @@ return {
             opts.desc = "Go to declaration"
             vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
             vim.keymap.set("n", "<C-b>", vim.lsp.buf.declaration, opts) -- go to declaration
+            vim.keymap.set("n", "<leader><C-b>", function()
+                vim.cmd("vsplit")
+                vim.lsp.buf.declaration()
+            end, opts)
 
             opts.desc = "Show LSP definitions"
             vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
@@ -103,7 +107,6 @@ return {
                 },
             },
         })
-
         -- configure lua server (with special settings)
         lspconfig["lua_ls"].setup({
             capabilities = capabilities,
