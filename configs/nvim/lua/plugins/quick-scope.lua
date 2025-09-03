@@ -1,11 +1,12 @@
 return {
-	"unblevable/quick-scope",
-	config = function()
-		-- Set custom highlights for QuickScope
-		-- local primary = vim.api.nvim_get_hl_by_name("Visual", true)
-		-- local secondary = vim.api.nvim_get_hl_by_name("Type", true)
+  "unblevable/quick-scope",
+  config = function()
+    local function set_hl()
+      vim.api.nvim_set_hl(0, "QuickScopePrimary", { fg = "#d3869b", bold = true })
+      vim.api.nvim_set_hl(0, "QuickScopeSecondary", { fg = "#83a598", bold = true })
 
-		-- vim.api.nvim_set_hl(0, 'QuickScopePrimary', primary)
-		-- vim.api.nvim_set_hl(0, 'QuickScopeSecondary', secondary)
-	end,
+    end
+    set_hl()
+    vim.api.nvim_create_autocmd("ColorScheme", { callback = set_hl })
+  end,
 }
