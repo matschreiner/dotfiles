@@ -6,6 +6,13 @@ return {
 		vim.g.loaded_netrwPlugin = 1
 		vim.opt.termguicolors = true
 		require("nvim-tree").setup({
+            on_attach = function(bufnr)
+                  local api = require("nvim-tree.api")
+                  api.config.mappings.default_on_attach(bufnr)
+                  pcall(vim.keymap.del, "n", "s", { buffer = bufnr })
+                  pcall(vim.keymap.del, "n", "S", { buffer = bufnr })
+            end,
+
 			view = {
 				width = 35,
 				relativenumber = true,
