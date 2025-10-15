@@ -9,6 +9,7 @@ return {
             dashboard.button("n", "New file", ":ene<CR>"),
             dashboard.button("r", "Recent files", ":Telescope oldfiles<CR>"),
             dashboard.button("f", "Find file", ":Telescope find_files<CR>"),
+            dashboard.button("e", "Explorer", ":NvimTreeToggle<CR>"),
             dashboard.button("q", "Quit", ":qa<CR>"),
         }
 
