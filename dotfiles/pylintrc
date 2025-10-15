@@ -17,3 +17,8 @@ good-names-rgxs=[_a-zA-Z][_a-zA-Z0-9]?$
 
 msg-template={msg_id}({category}): {msg}
 
+[FORMAT]
+max-line-length=120
+
+
+
