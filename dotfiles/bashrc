@@ -1,1 +1,8 @@
 alias tmux="TERM=screen-256color-bce tmux"
+
+cat <<'EOF' >> ~/.bash_profile
+if [ -z "$SSH_AUTH_SOCK" ]; then
+  eval "$(ssh-agent -s)" >/dev/null
+  ssh-add ~/.ssh/* 2>/dev/null
+fi
+EOF
