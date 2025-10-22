@@ -6,18 +6,50 @@ exec_always --no-startup-id xinput set-prop "SYNA8022:00 06CB:CE67 Touchpad" "li
 exec_always --no-startup-id xinput set-prop "SYNA8022:00 06CB:CE67 Touchpad" "libinput Natural Scrolling Enabled" 1
 # exec_always --no-startup-id picom --experimental-backends
 exec_always --no-startup-id picom --experimental-backends --backend glx --vsync
+exec_always --no-startup-id $HOME/.config/polybar/launch_polybars.sh
+
+bindsym $mod+m exec --no-startup-id $HOME/dotfiles/scripts/change_screen.sh
+
+
+# assign [class="Alacritty"] → 1
+# assign [class="Google-chrome"] → 2
+# assign [class="Slack"] → 3
+
+# Launch apps on startup
+exec --no-startup-id alacritty
+exec --no-startup-id google-chrome
+exec --no-startup-id slack
+# exec --no-startup-id google-chrome --incognito
 
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%
 
 
 # App launcher
-bindsym $mod+d exec --no-startup-id /home/masc/dotfiles/rice/rofi/launcher.sh
+bindsym $mod+w exec --no-startup-id /home/masc/dotfiles/rice/rofi/launcher.sh
 # Power menu
-bindsym $mod+Shift+e exec /home/masc/dotfiles/rice/rofi/powermenu.sh
+bindsym $mod+q exec /home/masc/dotfiles/rice/rofi/powermenu.sh
+
+bindsym $mod+Shift+Right move workspace to output right
+bindsym $mod+Shift+Left  move workspace to output left
+bindsym $mod+Shift+Up    move workspace to output up
+bindsym $mod+Shift+Down  move workspace to output down
+
+bindsym $mod+Shift+f exec --no-startup-id bash -c 'i3-msg "border pixel 4; border_color #fabd2f", sleep 0.2, i3-msg "border pixel 2; border_color #3c3836"'
+
+#arandr
+bindsym $mod+a exec --no-startup-id arandr
+
+
+# bindsym $mod+Shift+f exec --no-startup-id bash -c 'i3-msg "border pixel 4; border_color #fabd2f", sleep 0.2, i3-msg "border pixel 2; border_color #3c3836"'
+# bindsym $mod+Shift+f exec --no-startup-id notify-send "Focused: $(i3-msg -t get_tree | jq -r ".. | select(.focused?) | .name")"
+# toggle tiling / floating
+# bindsym $mod+Shift+f floating toggle
+
 
 
 # Font for window titles. Will also be used by the bar unless a different fon
@@ -86,11 +118,8 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+s layout toggle split
 bindsym $mod+t layout tabbed
 
-# toggle tiling / floating
-bindsym $mod+Shift+f floating toggle
-
 # focus the parent container
-bindsym $mod+a focus parent
+# bindsym $mod+a focus parent
 
 set $ws1 "1"
 set $ws2 "2"
@@ -156,11 +185,12 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
+workspace_auto_back_and_forth yes
 
 bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-# bar {
-#         status_command i3status
-# }
+bar {
+        status_command i3status
+}
