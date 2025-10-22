@@ -61,6 +61,9 @@ vim.cmd([[iabbr implt import matplotlib.pyplot as plt]])
 vim.cmd(
     [[iabbr pytargs <esc>I<cr><cr><cr>def main(args):<esc>ggOfrom argparse import ArgumentParser<esc>Go<esc>I<cr><cr>if __name__ == "__main__":<cr>parser = ArgumentParser()<cr># parser.add_argument('arg')<cr># parser.add_argument('--kwarg')<cr><cr>main(parser.parse_args())<esc>`ai<tab>]]
 )
+vim.cmd([[
+iabbr defmain import argparse<CR><CR><CR>def main():<CR>pass<CR><CR><CR>if __name__ == "__main__":<CR>argparser = argparse.ArgumentParser()<CR># argparser.add_argument('arg', arg)<CR># argparser.add_argument('--kwarg', kwarg)<CR>args = argparser.parse_args()<CR>main(args)
+]])
 
 keymap.set("n", "<leader>rg", 'y:%s/<C-R>"//g<left><left>')
 keymap.set("n", "<leader>rl", 'y:s/<C-R>"//g<left><left>')
