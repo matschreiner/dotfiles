@@ -8,7 +8,9 @@ exec_always --no-startup-id xinput set-prop "SYNA8022:00 06CB:CE67 Touchpad" "li
 exec_always --no-startup-id picom --experimental-backends --backend glx --vsync
 exec_always --no-startup-id $HOME/.config/polybar/launch_polybars.sh
 
-bindsym $mod+m exec --no-startup-id $HOME/dotfiles/scripts/change_screen.sh
+# bindsym $mod+m exec --no-startup-id bash -c "$HOME/dotfiles/scripts/change_screen.sh"
+bindsym $mod+m exec --no-startup-id bash -c "/home/masc/dotfiles/scripts/change_screen.sh >> /tmp/change_screen.log 2>&1"
+
 
 
 # assign [class="Alacritty"] → 1
@@ -30,9 +32,13 @@ bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%
 
 
 # App launcher
-bindsym $mod+w exec --no-startup-id /home/masc/dotfiles/rice/rofi/launcher.sh
+bindsym $mod+r exec --no-startup-id /home/masc/dotfiles/rice/rofi/launcher.sh
+# kill focused window
+bindsym $mod+q kill
 # Power menu
-bindsym $mod+q exec /home/masc/dotfiles/rice/rofi/powermenu.sh
+bindsym $mod+p exec /home/masc/dotfiles/rice/rofi/powermenu.sh
+bindsym $mod+z exec i3lock-fancy 
+
 
 bindsym $mod+Shift+Right move workspace to output right
 bindsym $mod+Shift+Left  move workspace to output left
@@ -87,8 +93,7 @@ tiling_drag modifier titlebar
 
 bindsym $mod+Return exec alacritty
 
-# kill focused window
-bindsym $mod+Shift+q kill
+
 
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
@@ -132,6 +137,9 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+# don't go to last if already on the chosen workspace
+workspace_auto_back_and_forth off
+
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -162,32 +170,31 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+# mode "resize" {
+#         # These bindings trigger as soon as you enter the resize mode
+#
+#         # Pressing left will shrink the window’s width.
+#         # Pressing right will grow the window’s width.
+#         # Pressing up will shrink the window’s height.
+#         # Pressing down will grow the window’s height.
+#         bindsym j resize shrink width 10 px or 10 ppt
+#         bindsym k resize grow height 10 px or 10 ppt
+#         bindsym l resize shrink height 10 px or 10 ppt
+#         bindsym ae resize grow width 10 px or 10 ppt
+#
+#         # same bindings, but for the arrow keys
+#         bindsym Left resize shrink width 10 px or 10 ppt
+#         bindsym Down resize grow height 10 px or 10 ppt
+#         bindsym Up resize shrink height 10 px or 10 ppt
+#         bindsym Right resize grow width 10 px or 10 ppt
+#
+#         # back to normal: Enter or Escape or $mod+r
+#         bindsym Return mode "default"
+#         bindsym Escape mode "default"
+#         bindsym $mod+r mode "default"
+# }
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym ae resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
-workspace_auto_back_and_forth yes
-
-bindsym $mod+r mode "resize"
+# bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)

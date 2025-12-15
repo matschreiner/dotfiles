@@ -6,6 +6,10 @@ keymap.set("i", "jk", "<ESC>")
 keymap.set("i", "JK", "<ESC>")
 keymap.set("i", "jK", "<ESC>")
 keymap.set("i", "Jk", "<ESC>")
+keymap.set("i", "kj", "<ESC>")
+keymap.set("i", "KJ", "<ESC>")
+keymap.set("i", "Kj", "<ESC>")
+keymap.set("i", "kJ", "<ESC>")
 
 -- Turbomove
 keymap.set({ "n", "v" }, "J", "5j")
@@ -33,9 +37,13 @@ keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- 
 keymap.set("n", "<leader>sx", "<cmd>closbbbR>", { desc = "Close current split" }) -- close current split window
 
 -- Tab Management
-keymap.set("n", "<leader>tn", "<cmd>tabnew<CR>", { desc = "Open new tab" }) -- open new tab
-keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" }) -- close current tab
-keymap.set("n", "<leader>to", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
+
+keymap.set("n", "tn", "<cmd>tabnew<CR>", { desc = "Open new tab" }) -- open new tab
+keymap.set("n", "tq", "<cmd>tabclose<CR>", { desc = "Close current tab" }) -- close current tab
+keymap.set("n", "to", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
+keymap.set("n", "tl", "<cmd>tabnext<CR>", { desc = "Go to next tab" }) --  go to next tab
+keymap.set("n", "th", "<cmd>tabprevious<CR>", { desc = "Go to previous tab" }) --  go to previous tab
+
 keymap.set("n", "}", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  go to next tab
 keymap.set("n", "{", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
 
@@ -62,8 +70,10 @@ vim.cmd(
     [[iabbr pytargs <esc>I<cr><cr><cr>def main(args):<esc>ggOfrom argparse import ArgumentParser<esc>Go<esc>I<cr><cr>if __name__ == "__main__":<cr>parser = ArgumentParser()<cr># parser.add_argument('arg')<cr># parser.add_argument('--kwarg')<cr><cr>main(parser.parse_args())<esc>`ai<tab>]]
 )
 vim.cmd([[
-iabbr defmain import argparse<CR><CR><CR>def main():<CR>pass<CR><CR><CR>if __name__ == "__main__":<CR>argparser = argparse.ArgumentParser()<CR># argparser.add_argument('arg', arg)<CR># argparser.add_argument('--kwarg', kwarg)<CR>args = argparser.parse_args()<CR>main(args)
+iabbr defmain import argparse<CR><CR><CR>def main(args):<CR>pass<CR><CR><CR>if __name__ == "__main__":<CR>argparser = argparse.ArgumentParser()<CR># argparser.add_argument('arg', arg)<CR># argparser.add_argument('--kwarg', kwarg)<CR>args = argparser.parse_args()<CR>main(args)
 ]])
 
 keymap.set("n", "<leader>rg", 'y:%s/<C-R>"//g<left><left>')
 keymap.set("n", "<leader>rl", 'y:s/<C-R>"//g<left><left>')
+
+keymap.set("n", "<leader>ti", "A  # type: ignore<ESC>")
