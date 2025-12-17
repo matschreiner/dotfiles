@@ -29,7 +29,7 @@ return {
                     vim.lsp.buf.declaration()
                 end, opts)
                 vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                vim.keymap.set("n", "<c-k>", vim.lsp.buf.hover, opts)
+                vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover, opts)
                 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
                 vim.keymap.set("n", "<space>wl", function()
                     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
