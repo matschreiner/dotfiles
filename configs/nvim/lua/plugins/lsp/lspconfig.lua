@@ -24,6 +24,10 @@ return {
 
                 local opts = { buffer = ev.buf }
                 vim.keymap.set("n", "<c-b>", vim.lsp.buf.declaration, opts)
+                vim.keymap.set("n", "<leader><c-b>", function()
+                    vim.cmd("vsplit")
+                    vim.lsp.buf.declaration()
+                end, opts)
                 vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
                 vim.keymap.set("n", "<c-k>", vim.lsp.buf.hover, opts)
                 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
