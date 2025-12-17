@@ -21,3 +21,23 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt_local.expandtab = true
     end,
 })
+
+-- -- Change background to black when window loses focus
+-- local focusGroup = vim.api.nvim_create_augroup("WindowFocusBackground", { clear = true })
+--
+-- vim.api.nvim_create_autocmd("FocusLost", {
+--     pattern = "*",
+--     callback = function()
+--         vim.api.nvim_set_hl(0, "Normal", { bg = "#000000" })
+--     end,
+--     group = focusGroup,
+-- })
+--
+-- vim.api.nvim_create_autocmd("FocusGained", {
+--     pattern = "*",
+--     callback = function()
+--         -- Restore the gruvbox background color
+--         vim.api.nvim_set_hl(0, "Normal", { bg = "#282828" })
+--     end,
+--     group = focusGroup,
+-- })
