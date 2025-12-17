@@ -23,6 +23,12 @@ keymap.set("n", "<C-K>", "<C-W><C-K>")
 keymap.set("n", "<C-L>", "<C-W><C-L>")
 keymap.set("n", "<C-H>", "<C-W><C-H>")
 
+-- Navigate from terminal mode
+keymap.set("t", "<C-J>", "<C-\\><C-N><C-W><C-J>")
+keymap.set("t", "<C-K>", "<C-\\><C-N><C-W><C-K>")
+keymap.set("t", "<C-L>", "<C-\\><C-N><C-W><C-L>")
+keymap.set("t", "<C-H>", "<C-\\><C-N><C-W><C-H>")
+
 -- System clipboard
 keymap.set("v", "<leader>y", '"+y')
 keymap.set("n", "<leader>p", '"+p')
