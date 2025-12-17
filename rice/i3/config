@@ -25,6 +25,10 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%
 
+# Screenshot with flameshot
+bindsym $mod+Print exec --no-startup-id flameshot full --path ~/screenshots --clipboard
+bindsym Print exec --no-startup-id flameshot gui --path ~/screenshots --clipboard
+
 
 # App launcher
 bindsym $mod+r exec --no-startup-id /home/masc/dotfiles/rice/rofi/launcher.sh
