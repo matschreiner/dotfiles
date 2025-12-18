@@ -2,6 +2,13 @@ return {
     "neovim/nvim-lspconfig",
     config = function()
         -- NEW API: no require("lspconfig")
+        -- Configure lua_ls to use current working directory as root
+        vim.lsp.config.lua_ls = {
+            root_dir = function()
+                return vim.uv.cwd()
+            end,
+        }
+
         vim.lsp.enable("lua_ls")
         vim.lsp.enable("rust_analyzer")
         vim.lsp.enable("clangd")
