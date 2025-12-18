@@ -32,15 +32,48 @@ keymap.set("t", "<C-H>", "<C-\\><C-N><C-W><C-H>")
 -- System clipboard
 keymap.set("v", "<leader>y", '"+y')
 keymap.set("n", "<leader>p", '"+p')
-keymap.set("n", "<C-K>", "<C-W><C-K>")
-keymap.set("n", "<C-L>", "<C-W><C-L>")
-keymap.set("n", "<C-H>", "<C-W><C-H>")
 
 -- Window Management
 keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
 keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
 keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
 keymap.set("n", "<leader>sx", "<cmd>closbbbR>", { desc = "Close current split" }) -- close current split window
+
+-- Smart splits - Window resizing (repeatable mode)
+local function resize_and_continue(direction)
+    return function()
+        if direction == "h" then
+            require("smart-splits").resize_left()
+        elseif direction == "j" then
+            require("smart-splits").resize_down()
+        elseif direction == "k" then
+            require("smart-splits").resize_up()
+        elseif direction == "l" then
+            require("smart-splits").resize_right()
+        end
+
+        -- Set up temporary keymaps for repeating
+        local opts = { buffer = true, silent = true, nowait = true }
+        vim.keymap.set("n", "h", resize_and_continue("h"), opts)
+        vim.keymap.set("n", "j", resize_and_continue("j"), opts)
+        vim.keymap.set("n", "k", resize_and_continue("k"), opts)
+        vim.keymap.set("n", "l", resize_and_continue("l"), opts)
+
+        -- Press ESC to exit resize mode
+        vim.keymap.set("n", "<ESC>", function()
+            vim.keymap.del("n", "h", { buffer = true })
+            vim.keymap.del("n", "j", { buffer = true })
+            vim.keymap.del("n", "k", { buffer = true })
+            vim.keymap.del("n", "l", { buffer = true })
+            vim.keymap.del("n", "<ESC>", { buffer = true })
+        end, opts)
+    end
+end
+
+keymap.set("n", "<C-w>h", resize_and_continue("h"), { desc = "Resize left (repeatable)" })
+keymap.set("n", "<C-w>j", resize_and_continue("j"), { desc = "Resize down (repeatable)" })
+keymap.set("n", "<C-w>k", resize_and_continue("k"), { desc = "Resize up (repeatable)" })
+keymap.set("n", "<C-w>l", resize_and_continue("l"), { desc = "Resize right (repeatable)" })
 
 -- Tab Management
 
