@@ -14,6 +14,7 @@ return {
         vim.lsp.enable("clangd")
         vim.lsp.enable("eslint")
         vim.lsp.enable("rome")
+        vim.lsp.enable("dartls")
         -- vim.lsp.enable("basedpyright")
         -- vim.lsp.enable("pyright")
 

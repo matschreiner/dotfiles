@@ -9,6 +9,7 @@ return {
                 python = { "isort", "black" },
                 json = { "prettier" },
                 yaml = { "prettier" },
+                dart = { "dartfmt" },
             },
             format_after_save = {
                 lsp_fallback = true,
