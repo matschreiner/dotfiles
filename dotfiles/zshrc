@@ -16,6 +16,9 @@ export PATH="$HOME/src/nvim-linux64/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 
+# Setup Flutter SDK
+export PATH="$HOME/opt/flutter/bin:$PATH"
+
 # Setup custom aliases
 # --------------------
 alias activate='source venv/bin/activate'

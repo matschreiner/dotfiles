@@ -1,18 +1,57 @@
 return {
-    "coder/claudecode.nvim",
-    dependencies = { "folke/snacks.nvim" },
-    config = true,
+    "greggh/claude-code.nvim", -- adjust if your fork / repo name differs
+    lazy = false, -- you probably want this always available
     keys = {
-        { "<leader>c", nil, desc = "AI/Claude Code" },
-        { "<leader>cc", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
-        { "<leader>cf", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
-        { "<leader>cr", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
-        { "<leader>cC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
-        { "<leader>cm", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
-        { "<leader>cb", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
-        { "<leader>cs", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
-        -- Diff management
-        { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
-        { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+        { "<leader>ct", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+        { "<leader>cc", "<cmd>ClaudeCodeContinue<cr>", desc = "Continue Claude" },
+    },
+    opts = {
+        window = {
+            split_ratio = 0.3,
+            position = "vertical",
+            enter_insert = true,
+            hide_numbers = true,
+            hide_signcolumn = true,
+            float = {
+                width = "80%",
+                height = "80%",
+                row = "center",
+                col = "center",
+                relative = "editor",
+                border = "rounded",
+            },
+        },
+        refresh = {
+            enable = true,
+            updatetime = 100,
+            timer_interval = 1000,
+            show_notifications = true,
+        },
+        git = {
+            use_git_root = true,
+        },
+        shell = {
+            separator = "&&",
+            pushd_cmd = "pushd",
+            popd_cmd = "popd",
+        },
+        command = "claude",
+        command_variants = {
+            continue = "--continue",
+            resume = "--resume",
+            verbose = "--verbose",
+        },
+        keymaps = {
+            toggle = {
+                normal = "<C-,>",
+                terminal = "<C-,>",
+                variants = {
+                    continue = "<leader>cC",
+                    verbose = "<leader>cV",
+                },
+            },
+            window_navigation = true,
+            scrolling = true,
+        },
     },
 }
