@@ -9,7 +9,7 @@ return {
                 python = { "isort", "black" },
                 json = { "prettier" },
                 yaml = { "prettier" },
-                dart = { "dartfmt" },
+                dart = { "dart_format" },
             },
             format_after_save = {
                 lsp_fallback = true,

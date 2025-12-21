@@ -9,6 +9,13 @@ return {
             end,
         }
 
+        -- Configure dartls to use Dart SDK
+        vim.lsp.config.dartls = {
+            cmd = { "dart", "language-server", "--protocol=lsp" },
+            filetypes = { "dart" },
+            root_markers = { "pubspec.yaml" },
+        }
+
         vim.lsp.enable("lua_ls")
         vim.lsp.enable("rust_analyzer")
         vim.lsp.enable("clangd")
