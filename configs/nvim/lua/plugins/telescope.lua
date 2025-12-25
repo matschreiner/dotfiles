@@ -12,6 +12,10 @@ return {
             defaults = {
                 path_display = { "truncate " },
                 file_ignore_patterns = { "venv", "node_modules", ".git" },
+                -- Disable treesitter in previewer (compatibility fix)
+                preview = {
+                    treesitter = false,
+                },
             },
         })
         telescope.load_extension("fzf")
