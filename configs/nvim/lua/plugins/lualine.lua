@@ -8,7 +8,7 @@ return {
                 section_separators = { left = "", right = "" },
                 component_separators = { left = "", right = "" },
                 icons_enabled = true,
-                globalstatus = true,
+                globalstatus = false, -- Each window gets its own statusline
                 disabled_filetypes = { statusline = { "NvimTree", "lazy" } },
             },
             sections = {
