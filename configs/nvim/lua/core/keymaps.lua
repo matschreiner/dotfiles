@@ -17,6 +17,9 @@ keymap.set({ "n", "v" }, "K", "5k")
 keymap.set({ "n", "v" }, "L", "5l")
 keymap.set({ "n", "v" }, "H", "5h")
 
+-- Restore original J (join lines) to <leader>j
+keymap.set("n", "<leader>j", "J", { desc = "Join lines" })
+
 -- Navigate between windows
 keymap.set("n", "<C-J>", "<C-W><C-J>")
 keymap.set("n", "<C-K>", "<C-W><C-K>")
@@ -39,7 +42,7 @@ keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) 
 keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
 keymap.set("n", "<leader>sx", "<cmd>closbbbR>", { desc = "Close current split" }) -- close current split window
 
--- Smart splits - Window resizing (repeatable mode)
+-- Smart splits - Window resizing and swapping (repeatable mode)
 local function resize_and_continue(direction)
     return function()
         if direction == "h" then
@@ -52,19 +55,74 @@ local function resize_and_continue(direction)
             require("smart-splits").resize_right()
         end
 
-        -- Set up temporary keymaps for repeating
+        -- Set up temporary keymaps for both resize and swap
         local opts = { buffer = true, silent = true, nowait = true }
+
+        -- Resize keymaps (lowercase)
         vim.keymap.set("n", "h", resize_and_continue("h"), opts)
         vim.keymap.set("n", "j", resize_and_continue("j"), opts)
         vim.keymap.set("n", "k", resize_and_continue("k"), opts)
         vim.keymap.set("n", "l", resize_and_continue("l"), opts)
 
-        -- Press ESC to exit resize mode
+        -- Swap keymaps (uppercase)
+        vim.keymap.set("n", "H", swap_and_continue("h"), opts)
+        vim.keymap.set("n", "J", swap_and_continue("j"), opts)
+        vim.keymap.set("n", "K", swap_and_continue("k"), opts)
+        vim.keymap.set("n", "L", swap_and_continue("l"), opts)
+
+        -- Press ESC to exit resize/swap mode
         vim.keymap.set("n", "<ESC>", function()
             vim.keymap.del("n", "h", { buffer = true })
             vim.keymap.del("n", "j", { buffer = true })
             vim.keymap.del("n", "k", { buffer = true })
             vim.keymap.del("n", "l", { buffer = true })
+            vim.keymap.del("n", "H", { buffer = true })
+            vim.keymap.del("n", "J", { buffer = true })
+            vim.keymap.del("n", "K", { buffer = true })
+            vim.keymap.del("n", "L", { buffer = true })
+            vim.keymap.del("n", "<ESC>", { buffer = true })
+        end, opts)
+    end
+end
+
+local function swap_and_continue(direction)
+    return function()
+        -- Execute the swap operation
+        if direction == "h" then
+            require("smart-splits").swap_buf_left()
+        elseif direction == "j" then
+            require("smart-splits").swap_buf_down()
+        elseif direction == "k" then
+            require("smart-splits").swap_buf_up()
+        elseif direction == "l" then
+            require("smart-splits").swap_buf_right()
+        end
+
+        -- Set up temporary keymaps for both resize and swap
+        local opts = { buffer = true, silent = true, nowait = true }
+
+        -- Resize keymaps (lowercase)
+        vim.keymap.set("n", "h", resize_and_continue("h"), opts)
+        vim.keymap.set("n", "j", resize_and_continue("j"), opts)
+        vim.keymap.set("n", "k", resize_and_continue("k"), opts)
+        vim.keymap.set("n", "l", resize_and_continue("l"), opts)
+
+        -- Swap keymaps (uppercase)
+        vim.keymap.set("n", "H", swap_and_continue("h"), opts)
+        vim.keymap.set("n", "J", swap_and_continue("j"), opts)
+        vim.keymap.set("n", "K", swap_and_continue("k"), opts)
+        vim.keymap.set("n", "L", swap_and_continue("l"), opts)
+
+        -- Press ESC to exit resize/swap mode
+        vim.keymap.set("n", "<ESC>", function()
+            vim.keymap.del("n", "h", { buffer = true })
+            vim.keymap.del("n", "j", { buffer = true })
+            vim.keymap.del("n", "k", { buffer = true })
+            vim.keymap.del("n", "l", { buffer = true })
+            vim.keymap.del("n", "H", { buffer = true })
+            vim.keymap.del("n", "J", { buffer = true })
+            vim.keymap.del("n", "K", { buffer = true })
+            vim.keymap.del("n", "L", { buffer = true })
             vim.keymap.del("n", "<ESC>", { buffer = true })
         end, opts)
     end
