@@ -22,6 +22,29 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+-- Dart folding configuration
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "dart",
+    callback = function(args)
+        -- Check if Treesitter parser is available
+        local has_parser = pcall(vim.treesitter.get_parser, args.buf, "dart")
+
+        if has_parser then
+            -- Use Treesitter-based folding
+            vim.opt_local.foldmethod = "expr"
+            vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        else
+            -- Fallback to indent-based folding if parser not available
+            vim.opt_local.foldmethod = "indent"
+            print("Treesitter parser for Dart not found, using indent folding")
+        end
+
+        vim.opt_local.foldlevel = 99
+        vim.opt_local.foldlevelstart = 99
+        vim.opt_local.foldenable = true
+    end,
+})
+
 -- -- Change background to black when window loses focus
 -- local focusGroup = vim.api.nvim_create_augroup("WindowFocusBackground", { clear = true })
 --
