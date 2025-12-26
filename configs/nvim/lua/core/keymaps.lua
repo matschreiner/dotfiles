@@ -40,10 +40,56 @@ keymap.set("n", "<leader>p", '"+p')
 keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
 keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
 keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
-keymap.set("n", "<leader>sx", "<cmd>closbbbR>", { desc = "Close current split" }) -- close current split window
+keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window
+
+-- Window swapping from terminal mode (set up early, actual keymaps defined later)
+keymap.set("t", "<C-w>H", "<C-\\><C-n><C-w>H", { desc = "Swap window left from terminal" })
+keymap.set("t", "<C-w>J", "<C-\\><C-n><C-w>J", { desc = "Swap window down from terminal" })
+keymap.set("t", "<C-w>K", "<C-\\><C-n><C-w>K", { desc = "Swap window up from terminal" })
+keymap.set("t", "<C-w>L", "<C-\\><C-n><C-w>L", { desc = "Swap window right from terminal" })
 
 -- Smart splits - Window resizing and swapping (repeatable mode)
-local function resize_and_continue(direction)
+-- Forward declarations to fix call order
+local resize_and_continue, swap_and_continue
+
+-- Common function to set up all temporary keymaps
+local function setup_window_mode_keymaps()
+    local opts = { buffer = true, silent = true, nowait = true }
+
+    -- Resize keymaps (lowercase)
+    vim.keymap.set("n", "h", resize_and_continue("h"), opts)
+    vim.keymap.set("n", "j", resize_and_continue("j"), opts)
+    vim.keymap.set("n", "k", resize_and_continue("k"), opts)
+    vim.keymap.set("n", "l", resize_and_continue("l"), opts)
+
+    -- Swap keymaps (uppercase)
+    vim.keymap.set("n", "H", swap_and_continue("h"), opts)
+    vim.keymap.set("n", "J", swap_and_continue("j"), opts)
+    vim.keymap.set("n", "K", swap_and_continue("k"), opts)
+    vim.keymap.set("n", "L", swap_and_continue("l"), opts)
+
+    -- ESC to exit resize/swap mode (works in both normal and terminal mode)
+    local function exit_window_mode()
+        pcall(vim.keymap.del, "n", "h", { buffer = true })
+        pcall(vim.keymap.del, "n", "j", { buffer = true })
+        pcall(vim.keymap.del, "n", "k", { buffer = true })
+        pcall(vim.keymap.del, "n", "l", { buffer = true })
+        pcall(vim.keymap.del, "n", "H", { buffer = true })
+        pcall(vim.keymap.del, "n", "J", { buffer = true })
+        pcall(vim.keymap.del, "n", "K", { buffer = true })
+        pcall(vim.keymap.del, "n", "L", { buffer = true })
+        pcall(vim.keymap.del, "n", "<ESC>", { buffer = true })
+        pcall(vim.keymap.del, "t", "<ESC>", { buffer = true })
+    end
+
+    vim.keymap.set("n", "<ESC>", exit_window_mode, opts)
+    vim.keymap.set("t", "<ESC>", function()
+        vim.cmd("stopinsert") -- Exit terminal mode
+        exit_window_mode()
+    end, opts)
+end
+
+resize_and_continue = function(direction)
     return function()
         if direction == "h" then
             require("smart-splits").resize_left()
@@ -55,39 +101,13 @@ local function resize_and_continue(direction)
             require("smart-splits").resize_right()
         end
 
-        -- Set up temporary keymaps for both resize and swap
-        local opts = { buffer = true, silent = true, nowait = true }
-
-        -- Resize keymaps (lowercase)
-        vim.keymap.set("n", "h", resize_and_continue("h"), opts)
-        vim.keymap.set("n", "j", resize_and_continue("j"), opts)
-        vim.keymap.set("n", "k", resize_and_continue("k"), opts)
-        vim.keymap.set("n", "l", resize_and_continue("l"), opts)
-
-        -- Swap keymaps (uppercase)
-        vim.keymap.set("n", "H", swap_and_continue("h"), opts)
-        vim.keymap.set("n", "J", swap_and_continue("j"), opts)
-        vim.keymap.set("n", "K", swap_and_continue("k"), opts)
-        vim.keymap.set("n", "L", swap_and_continue("l"), opts)
-
-        -- Press ESC to exit resize/swap mode
-        vim.keymap.set("n", "<ESC>", function()
-            vim.keymap.del("n", "h", { buffer = true })
-            vim.keymap.del("n", "j", { buffer = true })
-            vim.keymap.del("n", "k", { buffer = true })
-            vim.keymap.del("n", "l", { buffer = true })
-            vim.keymap.del("n", "H", { buffer = true })
-            vim.keymap.del("n", "J", { buffer = true })
-            vim.keymap.del("n", "K", { buffer = true })
-            vim.keymap.del("n", "L", { buffer = true })
-            vim.keymap.del("n", "<ESC>", { buffer = true })
-        end, opts)
+        vim.cmd("redraw") -- Clear any command echoes
+        setup_window_mode_keymaps()
     end
 end
 
-local function swap_and_continue(direction)
+swap_and_continue = function(direction)
     return function()
-        -- Execute the swap operation
         if direction == "h" then
             require("smart-splits").swap_buf_left()
         elseif direction == "j" then
@@ -98,33 +118,8 @@ local function swap_and_continue(direction)
             require("smart-splits").swap_buf_right()
         end
 
-        -- Set up temporary keymaps for both resize and swap
-        local opts = { buffer = true, silent = true, nowait = true }
-
-        -- Resize keymaps (lowercase)
-        vim.keymap.set("n", "h", resize_and_continue("h"), opts)
-        vim.keymap.set("n", "j", resize_and_continue("j"), opts)
-        vim.keymap.set("n", "k", resize_and_continue("k"), opts)
-        vim.keymap.set("n", "l", resize_and_continue("l"), opts)
-
-        -- Swap keymaps (uppercase)
-        vim.keymap.set("n", "H", swap_and_continue("h"), opts)
-        vim.keymap.set("n", "J", swap_and_continue("j"), opts)
-        vim.keymap.set("n", "K", swap_and_continue("k"), opts)
-        vim.keymap.set("n", "L", swap_and_continue("l"), opts)
-
-        -- Press ESC to exit resize/swap mode
-        vim.keymap.set("n", "<ESC>", function()
-            vim.keymap.del("n", "h", { buffer = true })
-            vim.keymap.del("n", "j", { buffer = true })
-            vim.keymap.del("n", "k", { buffer = true })
-            vim.keymap.del("n", "l", { buffer = true })
-            vim.keymap.del("n", "H", { buffer = true })
-            vim.keymap.del("n", "J", { buffer = true })
-            vim.keymap.del("n", "K", { buffer = true })
-            vim.keymap.del("n", "L", { buffer = true })
-            vim.keymap.del("n", "<ESC>", { buffer = true })
-        end, opts)
+        vim.cmd("redraw") -- Clear any command echoes
+        setup_window_mode_keymaps()
     end
 end
 
@@ -132,6 +127,12 @@ keymap.set("n", "<C-w>h", resize_and_continue("h"), { desc = "Resize left (repea
 keymap.set("n", "<C-w>j", resize_and_continue("j"), { desc = "Resize down (repeatable)" })
 keymap.set("n", "<C-w>k", resize_and_continue("k"), { desc = "Resize up (repeatable)" })
 keymap.set("n", "<C-w>l", resize_and_continue("l"), { desc = "Resize right (repeatable)" })
+
+-- Window swapping with capital letters (C-w H/J/K/L) - stays in window mode
+keymap.set("n", "<C-w>H", swap_and_continue("h"), { desc = "Swap window left (repeatable)" })
+keymap.set("n", "<C-w>J", swap_and_continue("j"), { desc = "Swap window down (repeatable)" })
+keymap.set("n", "<C-w>K", swap_and_continue("k"), { desc = "Swap window up (repeatable)" })
+keymap.set("n", "<C-w>L", swap_and_continue("l"), { desc = "Swap window right (repeatable)" })
 
 -- Tab Management
 
@@ -146,6 +147,11 @@ keymap.set("n", "{", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to
 
 keymap.set("n", "<leader>/", "<cmd>set hlsearch!<CR>", { desc = "Toggle search highlight" }) -- toggle search highlight
 keymap.set("n", "/", "<cmd>set hlsearch<CR>/", { desc = "Toggle search highlight" }) -- toggle search highlight
+
+-- Folding
+keymap.set("n", "zz", "za", { desc = "Toggle fold" }) -- toggle fold (replaces center screen)
+keymap.set("n", "zo", "zR", { desc = "Open all folds" })
+keymap.set("n", "zc", "zM", { desc = "Close all folds" })
 
 -- Hotkeys
 keymap.set("v", "<leader>enum", "senumerate()<esc>P?for\\s<cr>3lai, <esc>/enumerate<cr>")

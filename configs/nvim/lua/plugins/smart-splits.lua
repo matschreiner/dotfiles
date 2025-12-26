@@ -16,8 +16,8 @@ return {
             at_edge = "stop", -- Don't wrap to tmux panes at edge
             multiplexer_integration = false,
 
-            -- Disable cursor follows focus (optional, for cleaner behavior)
-            cursor_follows_swapped_bufs = false,
+            -- Enable cursor to follow buffer content when swapping windows
+            cursor_follows_swapped_bufs = true,
         })
     end,
 }
