@@ -64,3 +64,14 @@ vim.api.nvim_create_autocmd("FileType", {
 --     end,
 --     group = focusGroup,
 -- })
+
+-- Remove Python debug breakpoints commands
+local rm_bp_script = vim.fn.expand("$HOME/dotfiles/scripts/rm-breakpoints.sh")
+
+vim.api.nvim_create_user_command("RmBreakpointsDry", function()
+    vim.cmd("!" .. rm_bp_script .. " -n")
+end, { desc = "Preview pdb breakpoints that would be removed" })
+
+vim.api.nvim_create_user_command("RmBreakpoints", function()
+    vim.cmd("!" .. rm_bp_script)
+end, { desc = "Remove pdb breakpoints from Python files" })
