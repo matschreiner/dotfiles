@@ -120,7 +120,7 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout toggle split
-bindsym $mod+t layout tabbed
+bindsym $mod+t layout toggle tabbed stacked
 
 # focus the parent container
 # bindsym $mod+a focus parent
@@ -162,6 +162,24 @@ bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Swap workspace number mode
+# Press Mod+n, then a number to swap current workspace with that number
+bindsym $mod+n mode "swap"
+mode "swap" {
+    bindsym 1 exec --no-startup-id /home/masc/dotfiles/rice/i3/swap-workspace.sh 1, mode "default"
+    bindsym 2 exec --no-startup-id /home/masc/dotfiles/rice/i3/swap-workspace.sh 2, mode "default"
+    bindsym 3 exec --no-startup-id /home/masc/dotfiles/rice/i3/swap-workspace.sh 3, mode "default"
+    bindsym 4 exec --no-startup-id /home/masc/dotfiles/rice/i3/swap-workspace.sh 4, mode "default"
+    bindsym 5 exec --no-startup-id /home/masc/dotfiles/rice/i3/swap-workspace.sh 5, mode "default"
+    bindsym 6 exec --no-startup-id /home/masc/dotfiles/rice/i3/swap-workspace.sh 6, mode "default"
+    bindsym 7 exec --no-startup-id /home/masc/dotfiles/rice/i3/swap-workspace.sh 7, mode "default"
+    bindsym 8 exec --no-startup-id /home/masc/dotfiles/rice/i3/swap-workspace.sh 8, mode "default"
+    bindsym 9 exec --no-startup-id /home/masc/dotfiles/rice/i3/swap-workspace.sh 9, mode "default"
+    bindsym 0 exec --no-startup-id /home/masc/dotfiles/rice/i3/swap-workspace.sh 10, mode "default"
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
