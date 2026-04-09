@@ -75,3 +75,12 @@ end, { desc = "Preview pdb breakpoints that would be removed" })
 vim.api.nvim_create_user_command("RmBreakpoints", function()
     vim.cmd("!" .. rm_bp_script)
 end, { desc = "Remove pdb breakpoints from Python files" })
+
+-- Open nvim-tree when opening a file (but not on startpage)
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+        if vim.fn.argc() > 0 then
+            require("nvim-tree.api").tree.open()
+        end
+    end,
+})
