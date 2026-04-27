@@ -8,6 +8,7 @@ exec_always --no-startup-id xinput set-prop "SYNA8022:00 06CB:CE67 Touchpad" "li
 # exec_always --no-startup-id picom --experimental-backends
 exec_always --no-startup-id picom --experimental-backends --backend glx --vsync
 exec_always --no-startup-id $HOME/.config/polybar/launch_polybars.sh
+exec_always --no-startup-id $HOME/dotfiles/scripts/battery-monitor.sh
 
 # bindsym $mod+m exec --no-startup-id bash -c "$HOME/dotfiles/scripts/change_screen.sh"
 bindsym $mod+m exec --no-startup-id bash -c "/home/masc/dotfiles/scripts/change_screen.sh >> /tmp/change_screen.log 2>&1"
@@ -38,6 +39,7 @@ bindsym $mod+q kill
 bindsym $mod+Shift+q exec --no-startup-id xkill
 # Power menu
 bindsym $mod+p exec /home/masc/dotfiles/rice/rofi/powermenu.sh
+bindsym $mod+b exec /home/masc/dotfiles/rice/rofi/bluetooth.sh
 bindsym $mod+z exec i3lock-fancy 
 
 
