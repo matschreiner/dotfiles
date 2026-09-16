@@ -23,18 +23,19 @@ theme_overrides='
     }
 '
 
-# Build device list with live connection status
-menu_items=""
-while IFS= read -r line; do
-    mac=$(echo "$line" | awk '{print $2}')
-    name=$(echo "$line" | cut -d' ' -f3-)
-    connected=$(bluetoothctl info "$mac" 2>/dev/null | awk '/Connected:/ {print $2}')
-    if [[ "$connected" == "yes" ]]; then
-        menu_items+="● ${name}  [${mac}]\n"
-    else
-        menu_items+="○ ${name}  [${mac}]\n"
-    fi
-done < <(bluetoothctl devices Paired 2>/dev/null)
+build_menu_items() {
+    menu_items=""
+    while IFS= read -r line; do
+        mac=$(echo "$line" | awk '{print $2}')
+        name=$(echo "$line" | cut -d' ' -f3-)
+        connected=$(bluetoothctl info "$mac" 2>/dev/null | awk '/Connected:/ {print $2}')
+        if [[ "$connected" == "yes" ]]; then
+            menu_items+="● ${name}  [${mac}]\n"
+        else
+            menu_items+="○ ${name}  [${mac}]\n"
+        fi
+    done < <(bluetoothctl devices Paired 2>/dev/null)
+}
 
 rofi_menu() {
     local top_entry="$1"
@@ -43,34 +44,9 @@ rofi_menu() {
         -theme-str "$theme_overrides" \
         -a 0 \
         -kb-custom-1 c \
-        -kb-custom-2 d
+        -kb-custom-2 d \
+        -kb-custom-3 q
 }
-
-chosen=$(rofi_menu "$scan_refresh")
-rofi_exit=$?
-
-[[ -z "$chosen" ]] && exit 0
-
-# Scan: replace top entry with "Searching…", run discovery, reopen
-if [[ "$chosen" == "$scan_refresh" ]]; then
-    rofi_menu "$scan_active" &
-    rofi_pid=$!
-
-    echo -e "scan on\n"  | bluetoothctl > /dev/null 2>&1
-    sleep 5
-    echo -e "scan off\n" | bluetoothctl > /dev/null 2>&1
-
-    kill "$rofi_pid" 2>/dev/null
-    exec "$0"
-fi
-
-# Extract MAC from [XX:XX:XX:XX:XX:XX]
-mac=$(echo "$chosen" | grep -oE '[0-9A-Fa-f:]{17}')
-[[ -z "$mac" ]] && exit 1
-
-# Extract device name (strip "● "/"○ " prefix and "  [MAC]" suffix)
-name_with_icon=$(echo "$chosen" | sed 's/  \[.*\]$//')
-name="${name_with_icon:2}"
 
 do_connect() {
     notify-send "Bluetooth" "Connecting to ${name}…"
@@ -87,11 +63,37 @@ do_disconnect() {
     notify-send "Bluetooth" "Disconnecting from ${name}…"
 }
 
-case $rofi_exit in
-    10) do_connect ;;      # c
-    11) do_disconnect ;;   # d
-    *)                     # Enter — toggle
-        connected=$(bluetoothctl info "$mac" 2>/dev/null | awk '/Connected:/ {print $2}')
-        if [[ "$connected" == "yes" ]]; then do_disconnect; else do_connect; fi
-        ;;
-esac
+while true; do
+    build_menu_items
+
+    chosen=$(rofi_menu "$scan_refresh")
+    rofi_exit=$?
+
+    [[ -z "$chosen" ]] && break
+
+    if [[ "$chosen" == "$scan_refresh" ]]; then
+        rofi_menu "$scan_active" &
+        rofi_pid=$!
+        echo -e "scan on\n"  | bluetoothctl > /dev/null 2>&1
+        sleep 5
+        echo -e "scan off\n" | bluetoothctl > /dev/null 2>&1
+        kill "$rofi_pid" 2>/dev/null
+        continue
+    fi
+
+    mac=$(echo "$chosen" | grep -oE '[0-9A-Fa-f:]{17}')
+    [[ -z "$mac" ]] && break
+
+    name_with_icon=$(echo "$chosen" | sed 's/  \[.*\]$//')
+    name="${name_with_icon:2}"
+
+    case $rofi_exit in
+        10) do_connect    ;;   # c
+        11) do_disconnect ;;   # d
+        12) break         ;;   # q
+        *)
+            connected=$(bluetoothctl info "$mac" 2>/dev/null | awk '/Connected:/ {print $2}')
+            if [[ "$connected" == "yes" ]]; then do_disconnect; else do_connect; fi
+            ;;
+    esac
+done
