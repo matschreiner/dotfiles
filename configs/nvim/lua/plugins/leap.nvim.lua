@@ -1,5 +1,6 @@
 return {
     "ggandor/leap.nvim",
+    url = "https://codeberg.org/andyg/leap.nvim", -- moved from GitHub; the ggandor/leap.nvim mirror was emptied
     config = function()
         local leap = require("leap")
         leap.opts.case_sensitive = false
