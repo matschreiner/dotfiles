@@ -6,3 +6,13 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
   ssh-add ~/.ssh/* 2>/dev/null
 fi
 EOF
+### BEGIN MOTD
+# Version 10.08.2026
+# Silence the MOTD by creating the file '~/.hushlogin'
+if [ -f /run/motd.dynamic ] && [ ! -f ~/.hushlogin ]; then
+  cat /run/motd.dynamic
+fi
+### END MOTD
+# BEGIN ANSIBLE DMI OpenConnect
+alias dmivpn='sudo openconnect --no-external-auth --protocol=anyconnect --useragent=AnyConnect --authgroup=IDM --user=$USER@dmi.dk ra.dmi.dk'
+# END ANSIBLE DMI OpenConnect
