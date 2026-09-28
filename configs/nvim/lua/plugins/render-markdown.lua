@@ -3,6 +3,8 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
     ft = { "markdown" },
     config = function()
-        require("render-markdown").setup()
+        require("render-markdown").setup({
+            render_modes = { "n", "v", "i", "c", "t", "nt" },
+        })
     end,
 }
