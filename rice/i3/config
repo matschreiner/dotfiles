@@ -1,12 +1,31 @@
 set $mod Mod4
+
+# Gaps between windows and around the screen edge
+gaps inner 6
+gaps outer 0
+
+# Thin borders, no title bar (lets picom's rounded corners actually show)
+default_border pixel 0
+default_floating_border pixel 0
+# For tabbed/stacked containers, which still show a title bar: keep text
+# away from the rounded left corner
+title_align center
+
+# Gruvbox colors: class border backgr. text indicator child_border
+# focused/unfocused match on purpose — focus is shown via picom opacity, not color
+# border == background so no visible line is left anywhere
+client.focused          #282828 #282828 #ebdbb2 #282828 #282828
+client.unfocused        #282828 #282828 #a89984 #282828 #282828
+client.focused_inactive #282828 #282828 #a89984 #282828 #282828
+
 # Test comment for diff preview
 exec_always --no-startup-id bash -c "sleep 1 && setxkbmap us"
 
 # Enable tap-to-click and natural (inverted) scrolling for touchpad
 exec_always --no-startup-id xinput set-prop "SYNA8022:00 06CB:CE67 Touchpad" "libinput Tapping Enabled" 1
 exec_always --no-startup-id xinput set-prop "SYNA8022:00 06CB:CE67 Touchpad" "libinput Natural Scrolling Enabled" 1
-# exec_always --no-startup-id picom --experimental-backends
-exec_always --no-startup-id picom --experimental-backends --backend glx --vsync
+exec_always --no-startup-id picom --backend glx --vsync
+exec_always --no-startup-id feh --bg-fill $HOME/dotfiles/rice/images/pink-floyd-gruvbox-hd.jpg
 exec_always --no-startup-id $HOME/.config/polybar/launch_polybars.sh
 exec_always --no-startup-id $HOME/dotfiles/scripts/battery-monitor.sh
 exec --no-startup-id rclone mount gdrive: ~/cloud --daemon

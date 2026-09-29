@@ -34,7 +34,7 @@
     # os_icon               # os identifier
     dir                     # current directory
     vcs                     # git status
-    # prompt_char           # prompt symbol
+    prompt_char             # prompt symbol
   )
 
   # The list of segments shown on the right. Fill it with less important segments.
@@ -1726,6 +1726,11 @@
   # can slow down prompt by 1-2 milliseconds, so it's better to keep it turned off unless you
   # really need it.
   typeset -g POWERLEVEL9K_DISABLE_HOT_RELOAD=true
+
+  # Render the prompt synchronously instead of computing segments (like vcs/git status) in the
+  # background. Avoids the prompt redrawing/jumping to a new line if you start typing before
+  # async segments finish. Costs a tiny bit of prompt latency in exchange.
+  typeset -g POWERLEVEL9K_DISABLE_ASYNC=true
 
   # If p10k is already loaded, reload configuration.
   # This works even with POWERLEVEL9K_DISABLE_HOT_RELOAD=true.
