@@ -25,7 +25,7 @@ exec_always --no-startup-id bash -c "sleep 1 && setxkbmap us"
 exec_always --no-startup-id xinput set-prop "SYNA8022:00 06CB:CE67 Touchpad" "libinput Tapping Enabled" 1
 exec_always --no-startup-id xinput set-prop "SYNA8022:00 06CB:CE67 Touchpad" "libinput Natural Scrolling Enabled" 1
 exec_always --no-startup-id picom --backend glx --vsync
-exec_always --no-startup-id feh --bg-fill $HOME/dotfiles/rice/images/pink-floyd-gruvbox-hd.jpg
+exec_always --no-startup-id $HOME/dotfiles/rice/i3/set-wallpaper.sh
 exec_always --no-startup-id $HOME/.config/polybar/launch_polybars.sh
 exec_always --no-startup-id $HOME/dotfiles/scripts/battery-monitor.sh
 exec --no-startup-id rclone mount gdrive: ~/cloud --daemon
