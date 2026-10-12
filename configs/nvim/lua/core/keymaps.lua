@@ -203,6 +203,16 @@ keymap.set("n", "<leader>gb", function()
     require("gitsigns").blame_line({ full = true })
 end)
 
+keymap.set("n", "<leader>gp", function()
+    require("gitsigns").preview_hunk()
+end)
+
+keymap.set("n", "<leader>gd", function()
+    local gitsigns = require("gitsigns")
+    gitsigns.toggle_deleted()
+    gitsigns.toggle_linehl()
+end)
+
 vim.cmd(
     [[iabbr tomltool [tool.black]<CR>line-length = 120<CR><CR>[tool.isort]<CR>line_length = 120<CR>project = "anemoi"<CR>force_single_line = true]]
 )

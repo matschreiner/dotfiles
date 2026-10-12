@@ -1,7 +1,17 @@
 return {
     "lewis6991/gitsigns.nvim",
     config = function()
-        require("gitsigns").setup()
+        require("gitsigns").setup({
+            linehl = false, -- toggled on alongside show_deleted via <leader>gd, not always on
+            diff_opts = {
+                internal = false, -- shell out to real `git diff` instead of gitsigns' own differ, which interleaves add/remove lines differently (word_diff needs internal=true, so it's not usable here)
+            },
+        })
+        -- Background-only tints, so normal syntax highlighting still shows
+        -- through the text instead of being overridden by a single color.
+        vim.api.nvim_set_hl(0, "GitSignsAddLn", { bg = "#2d3a28" })
+        vim.api.nvim_set_hl(0, "GitSignsChangeLn", { bg = "#2d3a28" })
+        vim.api.nvim_set_hl(0, "GitSignsDeleteVirtLn", { bg = "#472525" })
     end,
     -- signs = {
     --     add = { text = "┃" },
