@@ -6,6 +6,9 @@ vim.opt.expandtab = true
 vim.opt.wrap = false
 vim.opt.splitright = true
 
+vim.opt.textwidth = 100
+vim.opt.formatoptions:remove("t") -- only wrap on demand via gq, not automatically while typing
+
 -- Folding configuration (Treesitter-based)
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
