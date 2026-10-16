@@ -23,6 +23,11 @@ return {
             conform.format({ bufnr = buffer_id })
         end
 
-        vim.keymap.set({ "n", "v" }, "<leader>b", format_buffer, { noremap = true, silent = true })
+        vim.keymap.set(
+            { "n", "v" },
+            "<leader>b",
+            format_buffer,
+            { noremap = true, silent = true, desc = "Format buffer" }
+        )
     end,
 }

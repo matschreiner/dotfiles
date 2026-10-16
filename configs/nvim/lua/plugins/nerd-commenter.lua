@@ -10,6 +10,6 @@ return {
         vim.g.NERDCommentBadWhitespace = 1
     end,
     config = function()
-        vim.keymap.set({ "n", "v" }, "<C-x>", "<Plug>NERDCommenterToggle", { silent = true })
+        vim.keymap.set({ "n", "v" }, "<C-x>", "<Plug>NERDCommenterToggle", { silent = true, desc = "Toggle comment" })
     end,
 }

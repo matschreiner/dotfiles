@@ -4,7 +4,7 @@ return {
     config = function()
         local leap = require("leap")
         leap.opts.case_sensitive = false
-        vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-anywhere)")
+        vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-anywhere)", { desc = "Leap to location" })
         vim.api.nvim_set_hl(0, "LeapMatch", { link = "Comment" })
         leap.init_hl()
         leap.auto_jump = false

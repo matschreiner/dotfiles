@@ -6,6 +6,11 @@ return {
             socket_name = "default",
             target_pane = "1",
         }
-        vim.keymap.set("n", "<C-C><C-R>", ":execute 'SlimeSend1 python ' . shellescape(expand('%'))<CR>")
+        vim.keymap.set(
+            "n",
+            "<C-C><C-R>",
+            ":execute 'SlimeSend1 python ' . shellescape(expand('%'))<CR>",
+            { desc = "Run current file via slime" }
+        )
     end,
 }

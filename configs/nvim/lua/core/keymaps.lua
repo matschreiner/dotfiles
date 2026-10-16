@@ -2,39 +2,39 @@ vim.g.mapleader = " "
 local keymap = vim.keymap
 
 -- Escape
-keymap.set("i", "jk", "<ESC>")
-keymap.set("i", "JK", "<ESC>")
-keymap.set("i", "jK", "<ESC>")
-keymap.set("i", "Jk", "<ESC>")
-keymap.set("i", "kj", "<ESC>")
-keymap.set("i", "KJ", "<ESC>")
-keymap.set("i", "Kj", "<ESC>")
-keymap.set("i", "kJ", "<ESC>")
+keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" })
+keymap.set("i", "JK", "<ESC>", { desc = "Exit insert mode" })
+keymap.set("i", "jK", "<ESC>", { desc = "Exit insert mode" })
+keymap.set("i", "Jk", "<ESC>", { desc = "Exit insert mode" })
+keymap.set("i", "kj", "<ESC>", { desc = "Exit insert mode" })
+keymap.set("i", "KJ", "<ESC>", { desc = "Exit insert mode" })
+keymap.set("i", "Kj", "<ESC>", { desc = "Exit insert mode" })
+keymap.set("i", "kJ", "<ESC>", { desc = "Exit insert mode" })
 
 -- Turbomove
-keymap.set({ "n", "v" }, "J", "5j")
-keymap.set({ "n", "v" }, "K", "5k")
-keymap.set({ "n", "v" }, "L", "5l")
-keymap.set({ "n", "v" }, "H", "5h")
+keymap.set({ "n", "v" }, "J", "5j", { desc = "Move down 5 lines" })
+keymap.set({ "n", "v" }, "K", "5k", { desc = "Move up 5 lines" })
+keymap.set({ "n", "v" }, "L", "5l", { desc = "Move right 5 columns" })
+keymap.set({ "n", "v" }, "H", "5h", { desc = "Move left 5 columns" })
 
 -- Restore original J (join lines) to <leader>j
 keymap.set("n", "<leader>j", "J", { desc = "Join lines" })
 
 -- Navigate between windows
-keymap.set("n", "<C-J>", "<C-W><C-J>")
-keymap.set("n", "<C-K>", "<C-W><C-K>")
-keymap.set("n", "<C-L>", "<C-W><C-L>")
-keymap.set("n", "<C-H>", "<C-W><C-H>")
+keymap.set("n", "<C-J>", "<C-W><C-J>", { desc = "Move to window below" })
+keymap.set("n", "<C-K>", "<C-W><C-K>", { desc = "Move to window above" })
+keymap.set("n", "<C-L>", "<C-W><C-L>", { desc = "Move to window right" })
+keymap.set("n", "<C-H>", "<C-W><C-H>", { desc = "Move to window left" })
 
 -- Navigate from terminal mode
-keymap.set("t", "<C-J>", "<C-\\><C-N><C-W><C-J>")
-keymap.set("t", "<C-K>", "<C-\\><C-N><C-W><C-K>")
-keymap.set("t", "<C-L>", "<C-\\><C-N><C-W><C-L>")
-keymap.set("t", "<C-H>", "<C-\\><C-N><C-W><C-H>")
+keymap.set("t", "<C-J>", "<C-\\><C-N><C-W><C-J>", { desc = "Move to window below (from terminal)" })
+keymap.set("t", "<C-K>", "<C-\\><C-N><C-W><C-K>", { desc = "Move to window above (from terminal)" })
+keymap.set("t", "<C-L>", "<C-\\><C-N><C-W><C-L>", { desc = "Move to window right (from terminal)" })
+keymap.set("t", "<C-H>", "<C-\\><C-N><C-W><C-H>", { desc = "Move to window left (from terminal)" })
 
 -- System clipboard
-keymap.set("v", "<leader>y", '"+y')
-keymap.set("n", "<leader>p", '"+p')
+keymap.set("v", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
+keymap.set("n", "<leader>p", '"+p', { desc = "Paste from system clipboard" })
 
 -- Window Management
 keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
@@ -72,18 +72,21 @@ end
 -- Common function to set up all temporary keymaps
 local function setup_window_mode_keymaps()
     local opts = { buffer = true, silent = true, nowait = true }
+    local function with_desc(desc)
+        return vim.tbl_extend("force", opts, { desc = desc })
+    end
 
     -- Resize keymaps (lowercase) - work in normal and terminal mode
-    vim.keymap.set({ "n", "t" }, "h", resize_and_continue("h"), opts)
-    vim.keymap.set({ "n", "t" }, "j", resize_and_continue("j"), opts)
-    vim.keymap.set({ "n", "t" }, "k", resize_and_continue("k"), opts)
-    vim.keymap.set({ "n", "t" }, "l", resize_and_continue("l"), opts)
+    vim.keymap.set({ "n", "t" }, "h", resize_and_continue("h"), with_desc("Resize window left"))
+    vim.keymap.set({ "n", "t" }, "j", resize_and_continue("j"), with_desc("Resize window down"))
+    vim.keymap.set({ "n", "t" }, "k", resize_and_continue("k"), with_desc("Resize window up"))
+    vim.keymap.set({ "n", "t" }, "l", resize_and_continue("l"), with_desc("Resize window right"))
 
     -- Swap keymaps (uppercase) - work in normal and terminal mode
-    vim.keymap.set({ "n", "t" }, "H", swap_and_continue("h"), opts)
-    vim.keymap.set({ "n", "t" }, "J", swap_and_continue("j"), opts)
-    vim.keymap.set({ "n", "t" }, "K", swap_and_continue("k"), opts)
-    vim.keymap.set({ "n", "t" }, "L", swap_and_continue("l"), opts)
+    vim.keymap.set({ "n", "t" }, "H", swap_and_continue("h"), with_desc("Swap window left"))
+    vim.keymap.set({ "n", "t" }, "J", swap_and_continue("j"), with_desc("Swap window down"))
+    vim.keymap.set({ "n", "t" }, "K", swap_and_continue("k"), with_desc("Swap window up"))
+    vim.keymap.set({ "n", "t" }, "L", swap_and_continue("l"), with_desc("Swap window right"))
 
     -- ESC to exit resize/swap mode (works in both normal and terminal mode)
     local function exit_window_mode()
@@ -108,11 +111,11 @@ local function setup_window_mode_keymaps()
         pcall(vim.keymap.del, "t", "<ESC>", { buffer = true })
     end
 
-    vim.keymap.set("n", "<ESC>", exit_window_mode, opts)
+    vim.keymap.set("n", "<ESC>", exit_window_mode, with_desc("Exit window resize/swap mode"))
     vim.keymap.set("t", "<ESC>", function()
         vim.cmd("stopinsert") -- Exit terminal mode
         exit_window_mode()
-    end, opts)
+    end, with_desc("Exit window resize/swap mode"))
 end
 
 -- Simple directional resize - always resize right/bottom edges
@@ -195,23 +198,37 @@ keymap.set("n", "zo", "zR", { desc = "Open all folds" })
 keymap.set("n", "zc", "zM", { desc = "Close all folds" })
 
 -- Hotkeys
-keymap.set("v", "<leader>enum", "senumerate()<esc>P?for\\s<cr>3lai, <esc>/enumerate<cr>")
-keymap.set("v", "<leader>arg", "xmai()<esc>P`ai")
-keymap.set("v", "<leader>next", "snext(iter(<esc>pa))<esc>")
+keymap.set("v", "<leader>enum", "senumerate()<esc>P?for\\s<cr>3lai, <esc>/enumerate<cr>", { desc = "Wrap for-loop iterable in enumerate()" })
+keymap.set("v", "<leader>arg", "xmai()<esc>P`ai", { desc = "Wrap selection in parentheses" })
+keymap.set("v", "<leader>next", "snext(iter(<esc>pa))<esc>", { desc = "Wrap selection in next(iter(...))" })
 
 keymap.set("n", "<leader>gb", function()
     require("gitsigns").blame_line({ full = true })
-end)
+end, { desc = "Git blame current line" })
 
 keymap.set("n", "<leader>gp", function()
     require("gitsigns").preview_hunk()
-end)
+end, { desc = "Preview git hunk" })
 
 keymap.set("n", "<leader>gd", function()
     local gitsigns = require("gitsigns")
     gitsigns.toggle_deleted()
     gitsigns.toggle_linehl()
-end)
+end, { desc = "Toggle deleted lines in git diff" })
+
+keymap.set("n", "<leader>gcb", function()
+    local gitsigns = require("gitsigns")
+    vim.ui.select({ "current", "main", "unpushed" }, { prompt = "Gitsigns diff base:" }, function(choice)
+        if choice == "current" then
+            gitsigns.change_base(nil, true)
+        elseif choice == "main" then
+            local has_main = vim.fn.system("git rev-parse --verify main 2>/dev/null") ~= ""
+            gitsigns.change_base(has_main and "main" or "master", true)
+        elseif choice == "unpushed" then
+            gitsigns.change_base("@{u}", true) -- diff against the upstream tracking branch
+        end
+    end)
+end, { desc = "Change gitsigns diff base" })
 
 vim.cmd(
     [[iabbr tomltool [tool.black]<CR>line-length = 120<CR><CR>[tool.isort]<CR>line_length = 120<CR>project = "anemoi"<CR>force_single_line = true]]
@@ -227,7 +244,7 @@ vim.cmd([[
 iabbr defmain import argparse<CR><CR><CR>def main(args):<CR>pass<CR><CR><CR>if __name__ == "__main__":<CR>argparser = argparse.ArgumentParser()<CR># argparser.add_argument('arg', arg)<CR># argparser.add_argument('--kwarg', kwarg)<CR>args = argparser.parse_args()<CR>main(args)
 ]])
 
-keymap.set("n", "<leader>rg", 'y:%s/<C-R>"//g<left><left>')
-keymap.set("n", "<leader>rl", 'y:s/<C-R>"//g<left><left>')
+keymap.set("n", "<leader>rg", 'y:%s/<C-R>"//g<left><left>', { desc = "Replace yanked word in whole file" })
+keymap.set("n", "<leader>rl", 'y:s/<C-R>"//g<left><left>', { desc = "Replace yanked word in current line" })
 
-keymap.set("n", "<leader>ti", "A  # type: ignore<ESC>")
+keymap.set("n", "<leader>ti", "A  # type: ignore<ESC>", { desc = "Append type: ignore comment" })
