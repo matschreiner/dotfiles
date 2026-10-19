@@ -49,6 +49,18 @@ return {
             },
         })
 
+        -- Open the file explorer alongside the alpha start screen, without
+        -- stealing focus from it (only when nvim was opened with no file/dir arg)
+        vim.api.nvim_create_autocmd("VimEnter", {
+            callback = function()
+                local real_file = vim.fn.argc() > 0 and vim.fn.filereadable(vim.fn.argv(0)) == 1
+                local directory = vim.fn.argc() > 0 and vim.fn.isdirectory(vim.fn.argv(0)) == 1
+                if not real_file and not directory then
+                    require("nvim-tree.api").tree.toggle({ focus = false })
+                end
+            end,
+        })
+
         -- set keymaps
         vim.keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" }) -- toggle file explorer
         vim.keymap.set(
