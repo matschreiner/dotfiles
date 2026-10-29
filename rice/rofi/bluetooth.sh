@@ -8,8 +8,15 @@ host=$(hostname)
 scan_refresh="↻ Scan for devices"
 scan_active="↻ Searching for devices…"
 
+power_on_label="⏻ Turn Bluetooth off"
+power_off_label="⏻ Turn Bluetooth on"
+
+bt_powered_on() {
+    [[ "$(bluetoothctl show 2>/dev/null | awk '/Powered:/ {print $2}')" == "yes" ]]
+}
+
 theme_overrides='
-    listview { lines: 6; }
+    listview { lines: 7; }
     mainbox  { children: [ "listview" ]; }
     element normal.active {
         background-color: @background-alt;
@@ -38,8 +45,11 @@ build_menu_items() {
 }
 
 rofi_menu() {
-    local top_entry="$1"
-    echo -e "${top_entry}\n${menu_items%\\n}" | rofi -dmenu \
+    local top_entries="$1"
+    local items="${menu_items%\\n}"
+    local full_list="$top_entries"
+    [[ -n "$items" ]] && full_list+="\n${items}"
+    echo -e "$full_list" | rofi -dmenu \
         -theme "$theme" \
         -theme-str "$theme_overrides" \
         -a 0 \
@@ -64,15 +74,32 @@ do_disconnect() {
 }
 
 while true; do
-    build_menu_items
-
-    chosen=$(rofi_menu "$scan_refresh")
+    if bt_powered_on; then
+        power_label="$power_on_label"
+        build_menu_items
+        chosen=$(rofi_menu "${power_label}\n${scan_refresh}")
+    else
+        power_label="$power_off_label"
+        menu_items=""
+        chosen=$(rofi_menu "${power_label}")
+    fi
     rofi_exit=$?
 
     [[ -z "$chosen" ]] && break
 
+    if [[ "$chosen" == "$power_on_label" || "$chosen" == "$power_off_label" ]]; then
+        if bt_powered_on; then
+            bluetoothctl power off > /dev/null 2>&1
+            notify-send "Bluetooth" "Bluetooth desactivado"
+        else
+            bluetoothctl power on > /dev/null 2>&1
+            notify-send "Bluetooth" "Bluetooth activado"
+        fi
+        continue
+    fi
+
     if [[ "$chosen" == "$scan_refresh" ]]; then
-        rofi_menu "$scan_active" &
+        rofi_menu "${power_label}\n${scan_active}" &
         rofi_pid=$!
         echo -e "scan on\n"  | bluetoothctl > /dev/null 2>&1
         sleep 5
