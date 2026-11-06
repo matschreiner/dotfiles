@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Refresh the ECMWF Teleport session, nothing more.
+#
+# The certificate lasts about 12 hours. Run this once a day, then connect
+# yourself with `ssh atos`, `ssh ecs-login`, scp, rsync or ssh-agent as usual.
+# Does nothing when the current session is still valid.
+set -euo pipefail
+
+PROXY=jump-18.ecmwf.int
+
+if tsh status >/dev/null 2>&1; then
+    tsh status | sed -n 's/^ *\(Valid until\|Logged in as\|Profile URL\)/  \1/p'
+    echo "atos-auth: session still valid, nothing to do"
+    exit 0
+fi
+
+echo "atos-auth: logging in to $PROXY" >&2
+echo "           a browser will open: ECMWF password, then the 6-digit code" >&2
+tsh login --proxy="$PROXY"

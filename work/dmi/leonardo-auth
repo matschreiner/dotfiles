@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Get a fresh CINECA SSH certificate, nothing more.
+#
+# CINECA issues a 12-hour certificate through step (OIDC, provisioner
+# cineca-hpc) and it cannot be renewed. Run this once a day, then connect
+# yourself with `ssh leonardo`, scp or rsync.
+set -euo pipefail
+
+EMAIL="${CINECA_EMAIL:-masc@dmi.dk}"
+
+if ssh -o BatchMode=yes -o ConnectTimeout=8 leonardo true 2>/dev/null; then
+    echo "leonardo-auth: certificate still valid, nothing to do"
+    exit 0
+fi
+
+echo "leonardo-auth: logging in as $EMAIL" >&2
+echo "               a browser will open: CINECA SSO" >&2
+step ssh login "$EMAIL" --provisioner cineca-hpc
