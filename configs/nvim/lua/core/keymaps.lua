@@ -42,6 +42,31 @@ keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) 
 keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
 keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window
 
+-- Zoom the current window, tmux-style (C-a z).
+-- Implemented as a tab rather than a resize: `tab split` puts this buffer
+-- alone in a new tab, and closing that tab restores the original layout
+-- exactly -- no saved sizes, no drift, and it works for terminals too.
+local function toggle_zoom()
+    if vim.api.nvim_get_mode().mode == "t" then
+        vim.cmd("stopinsert")
+    end
+    if vim.t.zoomed then
+        vim.cmd("tabclose")
+        return
+    end
+    if vim.fn.winnr("$") == 1 then
+        vim.notify("Nothing to zoom: only one window", vim.log.levels.INFO)
+        return
+    end
+    local view = vim.fn.winsaveview()
+    vim.cmd("tab split")
+    vim.fn.winrestview(view)
+    vim.t.zoomed = true
+end
+
+keymap.set({ "n", "t" }, "<C-w>z", toggle_zoom, { desc = "Zoom window (toggle)" })
+keymap.set("n", "<leader>sz", toggle_zoom, { desc = "Zoom window (toggle)" })
+
 -- Window swapping from terminal mode (set up early, actual keymaps defined later)
 keymap.set("t", "<C-w>H", "<C-\\><C-n><C-w>H", { desc = "Swap window left from terminal" })
 keymap.set("t", "<C-w>J", "<C-\\><C-n><C-w>J", { desc = "Swap window down from terminal" })
